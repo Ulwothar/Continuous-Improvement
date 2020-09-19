@@ -18,12 +18,12 @@ const NavLinks = (props) => {
       </li>
       <li>
         <NavLink to="/new" exact>
-          RECENT SUGESTIONS
+          RECENT SUGGESTIONS
         </NavLink>
       </li>
       <li>
         <NavLink to="/ongoing" exact>
-          CURRENT SUGGESTIONS
+          CURRENT PROJECTS
         </NavLink>
       </li>
       <li>
