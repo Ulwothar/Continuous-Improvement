@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Preview from '../../shared/components/Preview';
+import Preview from '../Components/Preview';
 import './CurrentProjects.css';
 
+//Dummy suggestions are to be replaced with actual logic once the back-end and database are ready
 const DUMMY_SUGGESTIONS = [
   {
     id: 's1',
@@ -37,15 +38,20 @@ const DUMMY_SUGGESTIONS = [
 ];
 
 const NoCurrentProjects = () => {
+  //Only to appear when there are no projects to load
   return <h3 className="no-projects-header">There are no ongoing projects.</h3>;
 };
 
 const CurrentProjects = () => {
   if (DUMMY_SUGGESTIONS.length > 0) {
+    // checking if there are any projects and if so, sending them to
     return (
+      // 'preview' component, which will display them
       <>
         <h3 className="page-title">Currently proccessed projects:</h3>
-        {DUMMY_SUGGESTIONS.map((project) => (
+        {DUMMY_SUGGESTIONS.map((
+          project, //decopmosing projects and sending them to 'preview' as preps
+        ) => (
           <Preview
             key={project.id}
             id={project.id}
@@ -63,7 +69,7 @@ const CurrentProjects = () => {
       </>
     );
   } else {
-    return NoCurrentProjects();
+    return NoCurrentProjects(); //returns this function if no projects were loaded
   }
 };
 

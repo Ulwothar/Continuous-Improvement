@@ -1,11 +1,16 @@
 import React from 'react';
 import './NewSuggestion.css';
 
+const submitHandler = async (event) => {
+  // logic to be added with back and db are ready
+  //event.preventDefault(); //prevents site from reloading when submitting suggestion
+};
+
 const NewSuggestion = () => {
   return (
     <div className="suggestion-form-container">
       <h2 className="suggestion-form-header">Suggestion Proposal Form</h2>
-      <form className="new-suggestion-form">
+      <form className="new-suggestion-form" onSubmit={submitHandler}>
         <label>
           Name
           <input
@@ -13,6 +18,7 @@ const NewSuggestion = () => {
             id="your-name"
             placeholder="Enter Your Name"
             className="name-form"
+            required
           />
         </label>
         <label>
@@ -28,8 +34,8 @@ const NewSuggestion = () => {
             <option value="GoodsIn">Goods In</option>
             <option value="Yard">Yard</option>
             <option value="Engineering">Engineering</option>
-            <option value="HumanResourcess">Human Resourcess</option>
-            <option value="NightHigiene">Night Higiene</option>
+            <option value="Human Resourcess">Human Resourcess</option>
+            <option value="Night Higiene">Night Higiene</option>
             <option value="Cleaning">Cleaning</option>
             <option value="Management">Management</option>
             <option value="Finance">Finance</option>
@@ -63,6 +69,15 @@ const NewSuggestion = () => {
             <option value="extra-processing">Extra-Processing</option>
           </select>
         </label>
+        <label className="suggestion-title">
+          Suggestion title
+          <input
+            type="text"
+            id="title-input"
+            placeholder="Please put a short title of your suggestion"
+            required
+          />
+        </label>
         <label className="current-label">
           Current situation
           <textarea
@@ -71,6 +86,7 @@ const NewSuggestion = () => {
             placeholder="Please describe the current situation here..."
             label="Current Situation:"
             className="current-situation-text"
+            required
           />
         </label>
         <label className="suggestion-label">
@@ -81,6 +97,7 @@ const NewSuggestion = () => {
             placeholder="Please describe your improvement suggestion here..."
             label="Improvement Suggestion:"
             className="suggestion-text"
+            required
           />
         </label>
         <label className="comment-label">

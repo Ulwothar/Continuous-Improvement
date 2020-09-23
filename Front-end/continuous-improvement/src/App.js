@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -10,40 +10,67 @@ import MainNavigation from './shared/components/MainNavigation';
 import NewSuggestion from './Projects/Pages/NewSuggestion';
 import RecentSuggestion from './Projects/Pages/RecentSuggestions';
 import CurrentProjects from './Projects/Pages/CurrentProjects';
-import finishedProjects from './Projects/Pages/FinishedProjects';
-import logo from './logo.svg';
-import './App.css';
 import FinishedProjects from './Projects/Pages/FinishedProjects';
+import Authenticate from './Users/Pages/Authenticate';
+import { AuthContext } from './shared/context/AuthContext';
+import './App.css';
 
 function App() {
+  const [isLogged, setIsLogged] = useState(false);
+
+  const login = useCallback(() => {
+    setIsLogged(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsLogged(false);
+  }, []);
+
   let routes;
 
-  routes = (
-    <Switch>
-      <Route path="/" exact>
-        <NewSuggestion />
-      </Route>
-      <Route path="/authenticate" exact></Route>
-      <Route path="/new" exact>
-        <RecentSuggestion />
-      </Route>
-      <Route path="/ongoing" exact>
-        <CurrentProjects />
-      </Route>
-      <Route path="/finished" exact>
-        <FinishedProjects />
-      </Route>
-      <Route path="/states" exact></Route>
-      <Route path="/states/:pid" exact></Route>
-      <Route path="/projects/:pid" exact></Route>
-      <Redirect to="/" />
-    </Switch>
-  );
+  if (!isLogged) {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <NewSuggestion />
+        </Route>
+        <Route path="/authenticate" exact>
+          <Authenticate />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <NewSuggestion />
+        </Route>
+        <Route path="/new" exact>
+          <RecentSuggestion />
+        </Route>
+        <Route path="/ongoing" exact>
+          <CurrentProjects />
+        </Route>
+        <Route path="/finished" exact>
+          <FinishedProjects />
+        </Route>
+        <Route path="/states" exact></Route>
+        <Route path="/states/:pid" exact></Route>
+        <Route path="/projects/:pid" exact></Route>
+        <Redirect to="/new" />
+      </Switch>
+    );
+  }
+
   return (
-    <Router>
-      <MainNavigation />
-      <main>{routes}</main>
-    </Router>
+    <AuthContext.Provider
+      value={{ isLogged: isLogged, login: login, logout: logout }}>
+      <Router>
+        <MainNavigation />
+        <main>{routes}</main>
+      </Router>
+    </AuthContext.Provider>
   );
 }
 

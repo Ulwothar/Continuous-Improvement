@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Preview from '../../shared/components/Preview';
+import Preview from '../Components/Preview';
 import './RecentSuggestions.css';
 
 const DUMMY_SUGGESTIONS = [
