@@ -1,0 +1,16 @@
+.authenticate-window {
+  position: relative;
+  max-width: 1200px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.name-label,
+.password-label {
+  display: block;
+}
+
+.input-text {
+  display: block;
+  margin: 15px auto;
+}
