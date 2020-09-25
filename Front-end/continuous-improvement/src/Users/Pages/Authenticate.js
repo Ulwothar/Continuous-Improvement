@@ -62,7 +62,7 @@ const Authenticate = () => {
           <label className="password-label">
             PASSWORD
             <input
-              type="text"
+              type="password"
               className="input-text"
               name="password"
               onChange={changeHandler}

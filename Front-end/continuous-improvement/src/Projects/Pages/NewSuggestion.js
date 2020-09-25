@@ -15,6 +15,7 @@ const NewSuggestion = () => {
           Name
           <input
             type="text"
+            name="userName"
             id="your-name"
             placeholder="Enter Your Name"
             className="name-form"
@@ -24,7 +25,7 @@ const NewSuggestion = () => {
         <label>
           Department
           <select
-            name="departments"
+            name="department"
             id="department"
             className="department-select"
             placeholder="Department">

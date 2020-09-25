@@ -13,15 +13,10 @@ const NavLinks = () => {
   };
   return (
     <span className="nav-links">
-      <li>
-        <NavLink to="/" exact>
-          NEW SUGGESTION
-        </NavLink>
-      </li>
-      {!auth.isLogged && (
+      {auth.isLogged && (
         <li>
-          <NavLink to="/authenticate" exact>
-            LOG IN
+          <NavLink to="/" exact>
+            NEW SUGGESTION
           </NavLink>
         </li>
       )}

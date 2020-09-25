@@ -1,76 +1,22 @@
 import React from 'react';
 
-import Preview from '../Components/Preview';
-import './CurrentProjects.css';
+import LoadProjects from '../Components/LoadProjects';
+import './RecentSuggestions.css';
 
-//Dummy suggestions are to be replaced with actual logic once the back-end and database are ready
-const DUMMY_SUGGESTIONS = [
-  {
-    id: 's1',
-    title: 'dummy title',
-    name: 'Mateusz Krupa',
-    department: 'High Care',
-    shift: 'AM',
-    type: 'Waiting',
-    date: '19.09.2020 00:46',
-    currentSituation:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    improvementSuggestion:
-      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here',
-    comments:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text.',
-  },
-  {
-    id: 's2',
-    title: 'dummy title again',
-    name: 'Mateusz Krupa',
-    department: 'High Care',
-    shift: 'AM',
-    type: 'Processing',
-    date: '19.09.2020 01:39',
-    currentSituation:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    improvementSuggestion:
-      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here',
-    comments:
-      'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text.',
-  },
-];
-
-const NoCurrentProjects = () => {
-  //Only to appear when there are no projects to load
-  return <h3 className="no-projects-header">There are no ongoing projects.</h3>;
+const CURRENT = {
+  status: 'ongoing',
+  message: 'There are no projects beeing processed at the moment',
+  title: 'Currently proccessing projects:',
 };
 
-const CurrentProjects = () => {
-  if (DUMMY_SUGGESTIONS.length > 0) {
-    // checking if there are any projects and if so, sending them to
-    return (
-      // 'preview' component, which will display them
-      <>
-        <h3 className="page-title">Currently proccessed projects:</h3>
-        {DUMMY_SUGGESTIONS.map((
-          project, //decopmosing projects and sending them to 'preview' as preps
-        ) => (
-          <Preview
-            key={project.id}
-            id={project.id}
-            title={project.title}
-            name={project.name}
-            department={project.department}
-            shift={project.shift}
-            type={project.type}
-            date={project.date}
-            currentSituation={project.currentSituation}
-            improvementSuggestion={project.improvementSuggestion}
-            comments={project.comments}
-          />
-        ))}
-      </>
-    );
-  } else {
-    return NoCurrentProjects(); //returns this function if no projects were loaded
-  }
+const FinishedProjects = () => {
+  return (
+    <LoadProjects
+      status={CURRENT.status}
+      message={CURRENT.message}
+      title={CURRENT.title}
+    />
+  );
 };
 
-export default CurrentProjects;
+export default FinishedProjects;
