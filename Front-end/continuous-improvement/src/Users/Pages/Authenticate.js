@@ -29,12 +29,10 @@ const Authenticate = () => {
 
   const logInSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(userDetails.userName);
     if (
       userDetails.userName === DUMMY_USER.name &&
       userDetails.password === DUMMY_USER.password
     ) {
-      console.log(userDetails.userName + '  ' + userDetails.password);
       auth.login();
     } else {
       console.log('Wrong username or password'); //ToDo: add invalid input handler for user info
