@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { placeNewSuggestion } from '../Components/SavedProjects';
 import './NewSuggestion.css';
 
-const submitHandler = async (event) => {
-  // logic to be added with back and db are ready
-  //event.preventDefault(); //prevents site from reloading when submitting suggestion
+let thisSuggestion = {
+  id: '',
+  userName: '',
+  department: 'RMP',
+  shift: 'AM',
+  type: 'defects',
+  title: '',
+  currentSituation: '',
+  improvementSuggestion: '',
+  comments: '',
+  date: '',
+  status: 'new',
 };
 
 const NewSuggestion = () => {
+  const [NewForm, setNewSuggestion] = useState(thisSuggestion);
+
+  const onChangeHandler = async (event) => {
+    let thisName = event.target.name;
+    //thisSuggestion[thisName] = event.target.value;
+    setNewSuggestion({
+      ...NewForm,
+      [thisName]: event.target.value,
+    });
+    //thisSuggestion[thisName] = NewForm[thisName];
+    //console.log(thisSuggestion[thisName]);
+  };
+
+  const submitHandler = async (event) => {
+    // logic to be added when back and db are ready
+    event.preventDefault(); //prevents site from reloading when submitting suggestion
+    NewForm.date = Date().toString().slice(0, 24);
+    NewForm.id = Math.floor(Math.random() * 1000000).toString();
+    placeNewSuggestion(NewForm);
+    console.log(NewForm);
+  };
+
   return (
     <div className="suggestion-form-container">
       <h2 className="suggestion-form-header">Suggestion Proposal Form</h2>
@@ -19,6 +52,7 @@ const NewSuggestion = () => {
             id="your-name"
             placeholder="Enter Your Name"
             className="name-form"
+            onChange={onChangeHandler}
             required
           />
         </label>
@@ -28,9 +62,10 @@ const NewSuggestion = () => {
             name="department"
             id="department"
             className="department-select"
+            onChange={onChangeHandler}
             placeholder="Department">
             <option value="RMP">RMP</option>
-            <option value="HighCare">High Care</option>
+            <option value="High Care">High Care</option>
             <option value="Packing">Packing</option>
             <option value="GoodsIn">Goods In</option>
             <option value="Yard">Yard</option>
@@ -48,6 +83,7 @@ const NewSuggestion = () => {
             name="shift"
             id="shift"
             className="shift-select"
+            onChange={onChangeHandler}
             label="Choose your shift pattern">
             <option value="AM">AM</option>
             <option value="PM">PM</option>
@@ -56,9 +92,10 @@ const NewSuggestion = () => {
         <label>
           Waste type seen (please choose)
           <select
-            name="waste"
+            name="type"
             id="waste"
             className="waste-select"
+            onChange={onChangeHandler}
             label="Waste type seen (Please choose from the list below)">
             <option value="defects">Defects</option>
             <option value="overproduction">Overproduction</option>
@@ -74,7 +111,9 @@ const NewSuggestion = () => {
           Suggestion title
           <input
             type="text"
+            name="title"
             id="title-input"
+            onChange={onChangeHandler}
             placeholder="Please put a short title of your suggestion"
             required
           />
@@ -83,7 +122,8 @@ const NewSuggestion = () => {
           Current situation
           <textarea
             id="current"
-            name="current"
+            name="currentSituation"
+            onChange={onChangeHandler}
             placeholder="Please describe the current situation here..."
             label="Current Situation:"
             className="current-situation-text"
@@ -94,7 +134,8 @@ const NewSuggestion = () => {
           Improvement suggestion
           <textarea
             id="improvement-suggestion"
-            name="improvement-suggestion"
+            name="improvementSuggestion"
+            onChange={onChangeHandler}
             placeholder="Please describe your improvement suggestion here..."
             label="Improvement Suggestion:"
             className="suggestion-text"
@@ -108,7 +149,8 @@ const NewSuggestion = () => {
             label="Additional Comments:"
             className="comments-text"
             id="additional-comments"
-            name="additional-comments"
+            name="comments"
+            onChange={onChangeHandler}
           />
         </label>
         <button type="submit" className="suggestion-form-submit-button">

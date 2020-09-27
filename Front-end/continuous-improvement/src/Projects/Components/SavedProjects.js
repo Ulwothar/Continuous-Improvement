@@ -1,10 +1,4 @@
-import React, { useState } from 'react';
-
-import Preview from './Preview';
-import SavedProjects from './SavedProjects';
-import './LoadProjects.css';
-
-const DUMMY_SUGGESTIONS = [
+let DUMMY_SUGGESTIONS = [
   {
     id: 's1',
     title: 'dummy new suggestion',
@@ -54,46 +48,13 @@ const DUMMY_SUGGESTIONS = [
       'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text.',
   },
 ];
-//this component will use the 'async/await get' method to get projects from back-end
-const LoadProjects = (props) => {
-  //   const [LoadedProjects, setSuggestions] = useState(DUMMY_SUGGESTIONS);
 
-  //   const suggestionHandler = () => {
-  //     setSuggestions(...LoadedProjects, props.form);
-  //   };
-  const LoadedProjects = SavedProjects();
-  const chooseProjects = () => {
-    //suggestionHandler();
-    //return console.log(LoadedProjects);
-    return LoadedProjects.map((project) =>
-      project.status === props.status ? (
-        <Preview
-          key={project.id}
-          id={project.id}
-          title={project.title}
-          name={project.name}
-          department={project.department}
-          shift={project.shift}
-          type={project.type}
-          date={project.date}
-          currentSituation={project.currentSituation}
-          improvementSuggestion={project.improvementSuggestion}
-          comments={project.comments}
-        />
-      ) : null,
-    );
-  };
-  if (LoadedProjects.length > 0) {
-    return (
-      <>
-        <h3 className="page-title">{props.title}</h3>
-
-        {chooseProjects()}
-      </>
-    );
-  } else {
-    return <h3>{props.message}</h3>;
-  }
+export const placeNewSuggestion = (props) => {
+  DUMMY_SUGGESTIONS.push(props);
 };
 
-export default LoadProjects;
+const SavedProjects = () => {
+  return DUMMY_SUGGESTIONS;
+};
+
+export default SavedProjects;
