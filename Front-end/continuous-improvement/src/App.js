@@ -11,6 +11,7 @@ import NewSuggestion from './Projects/Pages/NewSuggestion';
 import RecentSuggestion from './Projects/Pages/RecentSuggestions';
 import CurrentProjects from './Projects/Pages/CurrentProjects';
 import FinishedProjects from './Projects/Pages/FinishedProjects';
+import ReviewSuggestion from './Projects/Pages/ReviewSuggestion';
 import Authenticate from './Users/Pages/Authenticate';
 import { AuthContext } from './shared/context/AuthContext';
 import './App.css';
@@ -57,7 +58,9 @@ function App() {
         </Route>
         <Route path="/states" exact></Route>
         <Route path="/states/:pid" exact></Route>
-        <Route path="/projects/:pid" exact></Route>
+        <Route path="/projects/:pid" exact>
+          <ReviewSuggestion />
+        </Route>
         <Redirect to="/new" />
       </Switch>
     );
