@@ -20,15 +20,14 @@ let thisSuggestion = {
 const NewSuggestion = () => {
   const [NewForm, setNewSuggestion] = useState(thisSuggestion);
 
+  let thisName = '';
+
   const onChangeHandler = async (event) => {
-    let thisName = event.target.name;
-    //thisSuggestion[thisName] = event.target.value;
+    thisName = event.target.name;
     setNewSuggestion({
       ...NewForm,
       [thisName]: event.target.value,
     });
-    //thisSuggestion[thisName] = NewForm[thisName];
-    //console.log(thisSuggestion[thisName]);
   };
 
   const submitHandler = async (event) => {
@@ -37,6 +36,7 @@ const NewSuggestion = () => {
     NewForm.date = Date().toString().slice(0, 24);
     NewForm.id = Math.floor(Math.random() * 1000000).toString();
     placeNewSuggestion(NewForm);
+    event.target.reset();
     console.log(NewForm);
   };
 
@@ -48,7 +48,7 @@ const NewSuggestion = () => {
           Name
           <input
             type="text"
-            name="userName"
+            name="name"
             id="your-name"
             placeholder="Enter Your Name"
             className="name-form"
@@ -97,14 +97,14 @@ const NewSuggestion = () => {
             className="waste-select"
             onChange={onChangeHandler}
             label="Waste type seen (Please choose from the list below)">
-            <option value="defects">Defects</option>
-            <option value="overproduction">Overproduction</option>
-            <option value="waiting">Waiting</option>
-            <option value="non-utilisedTalent">Non-utilised talent</option>
-            <option value="transportation">Transportation</option>
-            <option value="inventory">Inventory</option>
-            <option value="motion">Motion</option>
-            <option value="extra-processing">Extra-Processing</option>
+            <option value="Defects">Defects</option>
+            <option value="Overproduction">Overproduction</option>
+            <option value="Waiting">Waiting</option>
+            <option value="Non-utilised Talent">Non-utilised talent</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Inventory">Inventory</option>
+            <option value="Motion">Motion</option>
+            <option value="Extra-processing">Extra-Processing</option>
           </select>
         </label>
         <label className="suggestion-title">
