@@ -17,21 +17,41 @@
 }
 
 .name-form {
-  display: inline;
+  display: inline-block;
+  margin: 0px 50px 0 5px;
+  height: 30px;
+  padding-top: 5px;
+  border: 1px inset gray;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-align: left;
+}
+.department-select {
+  display: inline-block;
+  width: 200px;
   margin: 0 50px 0 5px;
 }
-
-.department-select {
+.department-select Select {
   display: inline;
-  margin: 0 50px 0 5px;
+  position: relative;
 }
 
 .shift-select {
-  display: inline;
+  display: inline-block;
+  width: 100px;
   margin: 0 50px 0 5px;
 }
-
+.shift-select Select {
+  display: inline;
+  margin: 0 50px 0 5px;
+  position: relative;
+}
 .waste-select {
+  display: inline-block;
+  width: 250px;
+  margin: 0 50px 0 5px;
+}
+.waste-select Select {
   display: inline;
   margin: 0 50px 0 5px;
 }
@@ -83,4 +103,8 @@ textarea {
 #title-input {
   margin-left: 15px;
   width: 300px;
+}
+
+label > div {
+  display: inline;
 }

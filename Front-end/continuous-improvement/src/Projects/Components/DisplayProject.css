@@ -27,11 +27,14 @@ span {
   background: rgb(236, 236, 195);
   padding: 1rem;
   font-size: 1.1rem;
+  border-radius: 10px;
+  margin-bottom: 40px;
 }
 
 .suggestion-date {
   text-align: right;
   font-size: larger;
+  font-weight: bold;
 }
 
 .description-label {
