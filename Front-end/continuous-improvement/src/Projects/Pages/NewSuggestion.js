@@ -101,6 +101,7 @@ const NewSuggestion = () => {
             onChange={selectChangeHandler}
             label="Waste type seen (Please choose from the list below)"
             placeholder="Waste type"
+            required
             options={waste}></Select>
         </div>
 

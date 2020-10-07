@@ -28,6 +28,11 @@
   font-size: 1.1rem;
   text-align: left;
 }
+
+.name-form:hover {
+  border: 1px solid rgb(153, 149, 149);
+}
+
 .department-select {
   display: inline-block;
   width: 200px;
@@ -118,6 +123,10 @@ textarea {
   max-width: 100%;
 }
 
+.suggestion-title input:hover {
+  border: 1px solid rgb(153, 149, 149);
+}
+
 #title-input {
   margin-left: 15px;
   width: 300px;
@@ -135,11 +144,17 @@ label > div {
 }
 
 .suggestion-form-submit-button button {
-  background-color: rgb(224, 224, 84);
+  background-color: rgb(235, 235, 50);
   height: 55px;
   width: 120px;
   color: rgb(44, 89, 236);
   font-weight: bold;
   text-align: center;
   position: relative;
+}
+
+.suggestion-form-submit-button button:hover {
+  background-color: rgb(219, 181, 9);
+  color: rgb(28, 53, 134);
+  cursor: pointer;
 }

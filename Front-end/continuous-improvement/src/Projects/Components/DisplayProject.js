@@ -20,7 +20,7 @@ const DisplayProject = (props) => {
       // console.log(id);
       // console.log(status);
     }
-  }, [value.value]);
+  }, [value.value, props.id]);
 
   const statusOptions = statusSelect();
   return (
@@ -64,8 +64,14 @@ const DisplayProject = (props) => {
           <p className="description-text">{props.currentSituation}</p>
           <h4 className="description-label">Improvement suggestion:</h4>
           <p className="description-text">{props.improvementSuggestion}</p>
-          <h4 className="description-label">Comments:</h4>
-          <p className="description-text">{props.comments}</p>
+          {props.comments.length > 0 ? (
+            <>
+              <h4 className="description-label">Comments:</h4>
+              <p className="description-text">{props.comments}</p>
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </form>
     </div>
