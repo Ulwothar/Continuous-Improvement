@@ -53,6 +53,17 @@ export const placeNewSuggestion = (props) => {
   DUMMY_SUGGESTIONS.push(props);
 };
 
+export const changeStatus = (props) => {
+  const suggestionIndex = DUMMY_SUGGESTIONS.findIndex(
+    (element) => element.id === props.id,
+  );
+  DUMMY_SUGGESTIONS[suggestionIndex] = {
+    ...DUMMY_SUGGESTIONS[suggestionIndex],
+    status: props.status,
+  };
+  console.log(props);
+};
+
 const SavedProjects = () => {
   return DUMMY_SUGGESTIONS;
 };

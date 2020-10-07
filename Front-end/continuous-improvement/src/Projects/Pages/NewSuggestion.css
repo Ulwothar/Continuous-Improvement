@@ -14,6 +14,7 @@
 
 .new-suggestion-form {
   display: block;
+  width: 100%;
 }
 
 .name-form {
@@ -21,7 +22,8 @@
   margin: 0px 50px 0 5px;
   height: 30px;
   padding-top: 5px;
-  border: 1px inset gray;
+  padding-left: 1rem;
+  border: 1px solid rgb(211, 205, 205);
   border-radius: 5px;
   font-size: 1.1rem;
   text-align: left;
@@ -97,7 +99,23 @@ textarea {
 
 .suggestion-title {
   display: block;
-  margin-top: 25px;
+  font-size: 1.1rem;
+  text-align: left;
+  max-width: 1200px;
+  position: static;
+}
+
+.suggestion-title input {
+  display: inline-block;
+  margin: 25px 50px 0 5px;
+  height: 30px;
+  padding-top: 5px;
+  padding-left: 1rem;
+  border: 1px solid rgb(211, 205, 205);
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-align: left;
+  max-width: 100%;
 }
 
 #title-input {
@@ -107,4 +125,21 @@ textarea {
 
 label > div {
   display: inline;
+}
+
+.suggestion-form-submit-button {
+  margin: auto;
+  margin-bottom: 25px;
+  position: relative;
+  width: 120px;
+}
+
+.suggestion-form-submit-button button {
+  background-color: rgb(224, 224, 84);
+  height: 55px;
+  width: 120px;
+  color: rgb(44, 89, 236);
+  font-weight: bold;
+  text-align: center;
+  position: relative;
 }

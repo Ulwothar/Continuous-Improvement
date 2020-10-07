@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
 import { statusSelect } from '../../shared/UIComponents/form-select';
+import { changeStatus } from './SavedProjects';
 import './DisplayProject.css';
 
 const DisplayProject = (props) => {
   const [value, setValue] = useState(props.status);
+
+  const StatusChange = (statusValue) => {
+    setValue(statusValue);
+  };
+
+  useEffect(() => {
+    if (value.value) {
+      const id = props.id;
+      const status = value.value;
+      changeStatus({ id: id, status: status });
+      // console.log(id);
+      // console.log(status);
+    }
+  }, [value.value]);
 
   const statusOptions = statusSelect();
   return (
@@ -31,13 +46,19 @@ const DisplayProject = (props) => {
             <p>{props.type}</p>
           </label>
         </span>
+
         <label>
           Status:
-          <Select
-            className="status-select"
-            options={statusOptions}
-            defaultValue={{ label: value, value: value }}></Select>
+          <div className="status-select">
+            <Select
+              name="status"
+              onChange={StatusChange}
+              className="status-select-button"
+              options={statusOptions}
+              defaultValue={{ label: value, value: value }}></Select>
+          </div>
         </label>
+
         <div className="suggestion-description">
           <h4 className="description-label">Current situation:</h4>
           <p className="description-text">{props.currentSituation}</p>

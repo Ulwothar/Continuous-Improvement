@@ -111,7 +111,8 @@ const NewSuggestion = () => {
             name="title"
             id="title-input"
             onChange={onChangeHandler}
-            placeholder="Please put a short title of your suggestion"
+            placeholder="Suggestion title"
+            maxLength="50"
             required
           />
         </label>
@@ -150,9 +151,9 @@ const NewSuggestion = () => {
             onChange={onChangeHandler}
           />
         </label>
-        <button type="submit" className="suggestion-form-submit-button">
-          Submit Suggestion
-        </button>
+        <div className="suggestion-form-submit-button">
+          <button type="submit">SUBMIT</button>
+        </div>
       </form>
     </div>
   );

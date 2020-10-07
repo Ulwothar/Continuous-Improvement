@@ -5,6 +5,12 @@
   max-width: 1200px;
 }
 
+.project-window h3 {
+  font-size: 2.2rem;
+  text-align: center;
+  color: rgb(67, 145, 247);
+}
+
 label {
   white-space: nowrap;
   font-size: 1.2rem;
@@ -40,4 +46,10 @@ span {
 .description-label {
   font-size: 1.5rem;
   text-align: center;
+}
+
+.status-select {
+  display: inline-block;
+  width: 150px;
+  margin-left: 2rem;
 }
