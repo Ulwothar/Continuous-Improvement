@@ -67,7 +67,9 @@ const Authenticate = () => {
               required
             />
           </label>
-          <button type="submit">Log in</button>
+          <button type="submit" className="login-button">
+            Log in
+          </button>
         </form>
       </div>
     );

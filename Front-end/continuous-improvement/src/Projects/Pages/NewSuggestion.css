@@ -14,24 +14,51 @@
 
 .new-suggestion-form {
   display: block;
+  width: 100%;
 }
 
 .name-form {
-  display: inline;
-  margin: 0 50px 0 5px;
+  display: inline-block;
+  margin: 0px 50px 0 5px;
+  height: 30px;
+  padding-top: 5px;
+  padding-left: 1rem;
+  border: 1px solid rgb(211, 205, 205);
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.name-form:hover {
+  border: 1px solid rgb(153, 149, 149);
 }
 
 .department-select {
-  display: inline;
+  display: inline-block;
+  width: 200px;
   margin: 0 50px 0 5px;
+}
+.department-select Select {
+  display: inline;
+  position: relative;
 }
 
 .shift-select {
-  display: inline;
+  display: inline-block;
+  width: 100px;
   margin: 0 50px 0 5px;
 }
-
+.shift-select Select {
+  display: inline;
+  margin: 0 50px 0 5px;
+  position: relative;
+}
 .waste-select {
+  display: inline-block;
+  width: 250px;
+  margin: 0 50px 0 5px;
+}
+.waste-select Select {
   display: inline;
   margin: 0 50px 0 5px;
 }
@@ -77,10 +104,57 @@ textarea {
 
 .suggestion-title {
   display: block;
-  margin-top: 25px;
+  font-size: 1.1rem;
+  text-align: left;
+  max-width: 1200px;
+  position: static;
+}
+
+.suggestion-title input {
+  display: inline-block;
+  margin: 25px 50px 0 5px;
+  height: 30px;
+  padding-top: 5px;
+  padding-left: 1rem;
+  border: 1px solid rgb(211, 205, 205);
+  border-radius: 5px;
+  font-size: 1.1rem;
+  text-align: left;
+  max-width: 100%;
+}
+
+.suggestion-title input:hover {
+  border: 1px solid rgb(153, 149, 149);
 }
 
 #title-input {
   margin-left: 15px;
   width: 300px;
+}
+
+label > div {
+  display: inline;
+}
+
+.suggestion-form-submit-button {
+  margin: auto;
+  margin-bottom: 25px;
+  position: relative;
+  width: 120px;
+}
+
+.suggestion-form-submit-button button {
+  background-color: rgb(235, 235, 50);
+  height: 55px;
+  width: 120px;
+  color: rgb(44, 89, 236);
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+
+.suggestion-form-submit-button button:hover {
+  background-color: rgb(219, 181, 9);
+  color: rgb(28, 53, 134);
+  cursor: pointer;
 }

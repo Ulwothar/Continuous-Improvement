@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 
+import {
+  departmentSelect,
+  shiftSelect,
+  wasteSelect,
+} from '../../shared/UIComponents/form-select';
 import { placeNewSuggestion } from '../Components/SavedProjects';
 import './NewSuggestion.css';
 
@@ -20,14 +26,23 @@ let thisSuggestion = {
 const NewSuggestion = () => {
   const [NewForm, setNewSuggestion] = useState(thisSuggestion);
 
+  const department = departmentSelect();
+  const shift = shiftSelect();
+  const waste = wasteSelect();
+
   let thisName = '';
 
-  const onChangeHandler = async (event) => {
+  const onChangeHandler = (event) => {
     thisName = event.target.name;
     setNewSuggestion({
       ...NewForm,
       [thisName]: event.target.value,
     });
+  };
+
+  const selectChangeHandler = (value, action) => {
+    thisName = action.name;
+    setNewSuggestion({ ...NewForm, [thisName]: value.value });
   };
 
   const submitHandler = async (event) => {
@@ -39,6 +54,10 @@ const NewSuggestion = () => {
     event.target.reset();
     console.log(NewForm);
   };
+
+  useEffect(() => {
+    console.log(NewForm);
+  }, [NewForm]);
 
   return (
     <div className="suggestion-form-container">
@@ -56,57 +75,36 @@ const NewSuggestion = () => {
             required
           />
         </label>
-        <label>
-          Department
-          <select
+
+        <div className="department-select">
+          <Select
+            options={department}
             name="department"
             id="department"
-            className="department-select"
-            onChange={onChangeHandler}
-            placeholder="Department">
-            <option value="RMP">RMP</option>
-            <option value="High Care">High Care</option>
-            <option value="Packing">Packing</option>
-            <option value="GoodsIn">Goods In</option>
-            <option value="Yard">Yard</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Human Resourcess">Human Resourcess</option>
-            <option value="Night Higiene">Night Higiene</option>
-            <option value="Cleaning">Cleaning</option>
-            <option value="Management">Management</option>
-            <option value="Finance">Finance</option>
-          </select>
-        </label>
-        <label>
-          Shift
-          <select
+            onChange={selectChangeHandler}
+            placeholder="Department"></Select>
+        </div>
+
+        <div className="shift-select">
+          <Select
             name="shift"
             id="shift"
-            className="shift-select"
-            onChange={onChangeHandler}
-            label="Choose your shift pattern">
-            <option value="AM">AM</option>
-            <option value="PM">PM</option>
-          </select>
-        </label>
-        <label>
-          Waste type seen (please choose)
-          <select
+            placeholder="Shift"
+            onChange={selectChangeHandler}
+            options={shift}></Select>
+        </div>
+
+        <div className="waste-select">
+          <Select
             name="type"
             id="waste"
-            className="waste-select"
-            onChange={onChangeHandler}
-            label="Waste type seen (Please choose from the list below)">
-            <option value="Defects">Defects</option>
-            <option value="Overproduction">Overproduction</option>
-            <option value="Waiting">Waiting</option>
-            <option value="Non-utilised Talent">Non-utilised talent</option>
-            <option value="Transportation">Transportation</option>
-            <option value="Inventory">Inventory</option>
-            <option value="Motion">Motion</option>
-            <option value="Extra-processing">Extra-Processing</option>
-          </select>
-        </label>
+            onChange={selectChangeHandler}
+            label="Waste type seen (Please choose from the list below)"
+            placeholder="Waste type"
+            required
+            options={waste}></Select>
+        </div>
+
         <label className="suggestion-title">
           Suggestion title
           <input
@@ -114,7 +112,8 @@ const NewSuggestion = () => {
             name="title"
             id="title-input"
             onChange={onChangeHandler}
-            placeholder="Please put a short title of your suggestion"
+            placeholder="Suggestion title"
+            maxLength="50"
             required
           />
         </label>
@@ -153,9 +152,9 @@ const NewSuggestion = () => {
             onChange={onChangeHandler}
           />
         </label>
-        <button type="submit" className="suggestion-form-submit-button">
-          Submit Suggestion
-        </button>
+        <div className="suggestion-form-submit-button">
+          <button type="submit">SUBMIT</button>
+        </div>
       </form>
     </div>
   );
