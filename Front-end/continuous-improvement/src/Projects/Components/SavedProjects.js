@@ -1,3 +1,4 @@
+import React from 'react';
 let DUMMY_SUGGESTIONS = [
   {
     id: 's1',
@@ -14,6 +15,7 @@ let DUMMY_SUGGESTIONS = [
       'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here',
     comments:
       'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text.',
+    reviewerComments: 'just checking comment',
   },
   {
     id: 's2',
@@ -30,6 +32,7 @@ let DUMMY_SUGGESTIONS = [
       'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here',
     comments:
       'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text.',
+    reviewerComments: '',
   },
   {
     id: 's3',
@@ -46,6 +49,7 @@ let DUMMY_SUGGESTIONS = [
       'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here',
     comments:
       'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text.',
+    reviewerComments: '',
   },
 ];
 
@@ -62,6 +66,15 @@ export const changeStatus = (props) => {
     status: props.status,
   };
   console.log(props);
+};
+
+export const updateComments = (props) => {
+  const suggestionIndex = DUMMY_SUGGESTIONS.findIndex(
+    (element) => element.id === props.id,
+  );
+  const newComment = <p>{props.reviewerComments}</p>;
+
+  DUMMY_SUGGESTIONS[suggestionIndex] = {};
 };
 
 const SavedProjects = () => {

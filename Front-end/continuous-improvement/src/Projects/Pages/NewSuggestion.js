@@ -55,16 +55,16 @@ const NewSuggestion = () => {
     console.log(NewForm);
   };
 
-  useEffect(() => {
-    console.log(NewForm);
-  }, [NewForm]);
+  // useEffect(() => {
+  //   console.log(NewForm);
+  // }, [NewForm]);
 
   return (
     <div className="suggestion-form-container">
       <h2 className="suggestion-form-header">Suggestion Proposal Form</h2>
       <form className="new-suggestion-form" onSubmit={submitHandler}>
         <label>
-          Name
+          <p className="name-paragraph">Name</p>
           <input
             type="text"
             name="name"
@@ -101,18 +101,18 @@ const NewSuggestion = () => {
             onChange={selectChangeHandler}
             label="Waste type seen (Please choose from the list below)"
             placeholder="Waste type"
-            required
             options={waste}></Select>
         </div>
 
         <label className="suggestion-title">
-          Suggestion title
+          <p className="name-paragraph">Suggestion title</p>
           <input
             type="text"
             name="title"
             id="title-input"
+            className="title-name"
             onChange={onChangeHandler}
-            placeholder="Suggestion title"
+            placeholder="Enter suggestion title here"
             maxLength="50"
             required
           />
