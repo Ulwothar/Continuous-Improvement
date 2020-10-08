@@ -43,6 +43,7 @@ const LoadProjects = (props) => {
             currentSituation={project.currentSituation}
             improvementSuggestion={project.improvementSuggestion}
             comments={project.comments}
+            reviewerComments={project.reviewerComments}
           />
         ) : null,
       );
