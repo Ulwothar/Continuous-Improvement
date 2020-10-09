@@ -55,9 +55,9 @@ const NewSuggestion = () => {
     console.log(NewForm);
   };
 
-  // useEffect(() => {
-  //   console.log(NewForm);
-  // }, [NewForm]);
+  useEffect(() => {
+    console.log(NewForm);
+  }, [NewForm]);
 
   return (
     <div className="suggestion-form-container">

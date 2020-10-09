@@ -31,17 +31,17 @@ const DisplayProject = (props) => {
     event.target.reset();
   };
 
-  // useEffect(() => {
-  //   console.log(comments);
-  // }, [comments]);
+  useEffect(() => {
+    console.log(comments);
+  }, [comments]);
 
-  // useEffect(() => {
-  //   if (value.value) {
-  //     const id = props.id;
-  //     const status = value.value;
-  //     changeStatus({ id: id, status: status });
-  //   }
-  // }, [value.value, props.id]);
+  useEffect(() => {
+    if (value.value) {
+      const id = props.id;
+      const status = value.value;
+      changeStatus({ id: id, status: status });
+    }
+  }, [value.value, props.id]);
 
   const statusOptions = statusSelect();
   return (
