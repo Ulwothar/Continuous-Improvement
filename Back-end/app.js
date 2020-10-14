@@ -10,12 +10,12 @@ import commentsRoutes from './routes/comments-routes';
 dotenv.config();
 
 const app = express();
-// const DB = process.env.DB_URI;
+const DB = process.env.DB_URI;
 
-// const connectionSettings = {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// };
+const connectionSettings = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', `${process.env.FE_URI}`);
@@ -35,4 +35,12 @@ app.use('api/users', usersRoutes); //user login
 
 app.use('/api/comments', commentsRoutes); //reviewer comments
 
-app.listen(5000);
+mongoose
+  .connect(DB, connectionSettings)
+  .then(() => {
+    app.listen(5000);
+    console.log('Database connected!');
+  })
+  .catch((err) => {
+    console.log(err);
+  });

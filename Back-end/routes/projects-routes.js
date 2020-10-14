@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/status'); //Add middleware to get all projects with selected status
+router.get('/:status'); //Add middleware to get all projects with selected status
 
 router.patch('/:pid'); //Add middleware to change status of project
 
