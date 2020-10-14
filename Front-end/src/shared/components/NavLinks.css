@@ -1,0 +1,47 @@
+.nav-links {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  flex-direction: row;
+  background-color: rgb(233, 220, 42);
+  border-radius: 0 0 10px 10px;
+}
+
+.nav-links a,
+.nav-links a.visited {
+  text-decoration: none;
+  font-size: 20px;
+  color: darkblue;
+}
+
+.nav-links a:hover {
+  background: royalblue;
+  border-color: khaki;
+  color: khaki;
+}
+
+.nav-links a:active,
+.nav-links a.active {
+  background: rgba(0, 153, 255, 0.808);
+  border-color: rgb(252, 252, 252);
+  color: rgb(253, 253, 253);
+}
+
+.log-button {
+  text-decoration: none;
+  font-size: 20px;
+  color: darkblue;
+  background: rgb(233, 220, 42);
+  border: none;
+}
+
+.log-button:hover {
+  background: royalblue;
+  border-color: khaki;
+  color: khaki;
+}
