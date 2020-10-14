@@ -7,7 +7,7 @@ import { changeStatus } from './SavedProjects';
 import './DisplayProject.css';
 
 const DisplayProject = (props) => {
-  const [value, setValue] = useState(props.status); //State used to change status of project
+  const [value, setValue] = useState(props.status); //State used to change status of project - NEED TO ADD OPTION TO DELETE PROJECT HERE!!!
   const [comments, setComments] = useState(props.reviewerComments); //State used to change textarea with comments
   const id = props.id;
 
