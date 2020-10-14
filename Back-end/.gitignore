@@ -1,0 +1,6 @@
+# depencies
+/node_modules
+package-lock.json
+
+#private files
+.env
