@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import projectsRoutes from './routes/projects-routes';
 import usersRoutes from './routes/users-routes';
 import commentsRoutes from './routes/comments-routes';
+import HttpError from './models/http-error';
+import { error } from 'console';
 
 dotenv.config();
 
@@ -31,9 +33,25 @@ app.use(bodyParser.json());
 
 app.use('/api/projects', projectsRoutes); //projects
 
-app.use('api/users', usersRoutes); //user login
+app.get('/', (req, res) => {
+  res.send('Does it work?');
+});
+
+app.use('/api/users', usersRoutes); //user login
 
 app.use('/api/comments', commentsRoutes); //reviewer comments
+
+app.use((req, res, next) => {
+  throw new HttpError('Could not find this route', 404);
+});
+
+app.use((req, res, next) => {
+  if (res.headersSent) {
+    return next(error);
+  }
+  res.status(error.code || 500);
+  res.json({ message: error.message || 'An unknown error occured!' });
+});
 
 mongoose
   .connect(DB, connectionSettings)
