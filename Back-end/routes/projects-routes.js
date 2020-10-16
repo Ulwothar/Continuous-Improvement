@@ -1,6 +1,7 @@
 import express from 'express';
 
 import {
+  changeStatus,
   deleteProject,
   getProjectById,
   getProjectsByStatus,
@@ -8,14 +9,14 @@ import {
 
 const router = express.Router();
 
-router.get('/status/:status', getProjectsByStatus); //Add middleware to get all projects with selected status
+router.get('/status/:status', getProjectsByStatus);
 
-router.patch('/:pid'); //Add middleware to change status of project
+router.patch('/status/:pid', changeStatus);
 
 router.post('/'); //Add middleware to add new suggestion
 
-router.delete('/:pid', deleteProject); //Add middleware to delete rejected suggsetions
+router.delete('/:pid', deleteProject);
 
-router.get('/:pid', getProjectById); //Add middleware to get specified project
+router.get('/:pid', getProjectById);
 
 export default router;

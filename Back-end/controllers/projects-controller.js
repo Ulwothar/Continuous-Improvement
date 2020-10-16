@@ -65,3 +65,23 @@ export const deleteProject = async (req, res, next) => {
 
   res.status(200).json({ message: 'Project deleted!' });
 };
+
+export const changeStatus = async (req, res, next) => {
+  const status = req.body;
+  const projectId = req.params.pid;
+  let updatedProject;
+  try {
+    updatedProject = await Project.findByIdAndUpdate(projectId, status, {
+      new: true,
+      useFindAndModify: false,
+    });
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, updating status failed. Please try again.',
+      500,
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ project: updatedProject.toObject({ getters: true }) });
+};
