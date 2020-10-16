@@ -1,10 +1,13 @@
 import express from 'express';
 
-import { getProjectById } from '../controllers/projects-controller';
+import {
+  getProjectById,
+  getProjectsByStatus,
+} from '../controllers/projects-controller';
 
 const router = express.Router();
 
-router.get('/status/:status'); //Add middleware to get all projects with selected status
+router.get('/status/:status', getProjectsByStatus); //Add middleware to get all projects with selected status
 
 router.patch('/:pid'); //Add middleware to change status of project
 
