@@ -27,3 +27,24 @@ export const getProjectById = async (req, res, next) => {
 
   res.json({ project: project.toObject({ getters: true }) });
 };
+
+export const getProjectsByStatus = async (req, res, next) => {
+  const status = req.params.status;
+  let projects;
+  try {
+    projects = await Project.find({ status: status });
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not find any projects!',
+      500,
+    );
+    return next(error);
+  }
+
+  if (projects.length === 0) {
+    const error = new HttpError(`There are no ${status} places!`, 404);
+  }
+  res.json({
+    projects: projects.map((project) => project.toObject({ getters: true })),
+  });
+};
