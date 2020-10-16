@@ -48,3 +48,20 @@ export const getProjectsByStatus = async (req, res, next) => {
     projects: projects.map((project) => project.toObject({ getters: true })),
   });
 };
+
+export const deleteProject = async (req, res, next) => {
+  const projectId = req.params.pid;
+
+  try {
+    await Project.deleteOne({ _id: projectId });
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not delete this project!',
+      500,
+    );
+
+    next(error);
+  }
+
+  res.status(200).json({ message: 'Project deleted!' });
+};

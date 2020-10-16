@@ -1,6 +1,7 @@
 import express from 'express';
 
 import {
+  deleteProject,
   getProjectById,
   getProjectsByStatus,
 } from '../controllers/projects-controller';
@@ -13,7 +14,7 @@ router.patch('/:pid'); //Add middleware to change status of project
 
 router.post('/'); //Add middleware to add new suggestion
 
-router.delete('/:pid'); //Add middleware to delete rejected suggsetions
+router.delete('/:pid', deleteProject); //Add middleware to delete rejected suggsetions
 
 router.get('/:pid', getProjectById); //Add middleware to get specified project
 
