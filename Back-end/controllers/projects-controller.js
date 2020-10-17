@@ -1,4 +1,3 @@
-import mongose from 'mongoose';
 import { validationResult } from 'express-validator';
 
 import HttpError from '../models/http-error';
@@ -43,7 +42,7 @@ export const getProjectsByStatus = async (req, res, next) => {
   }
 
   if (projects.length === 0) {
-    const error = new HttpError(`There are no ${status} places!`, 404);
+    const error = new HttpError(`There are no ${status} projects!`, 404);
   }
   res.json({
     projects: projects.map((project) => project.toObject({ getters: true })),
@@ -133,5 +132,5 @@ export const createProject = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json(createProject);
+  res.status(201).json(createdProject);
 };
