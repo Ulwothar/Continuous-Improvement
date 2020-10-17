@@ -1,4 +1,5 @@
 import mongose from 'mongoose';
+import { validationResult } from 'express-validator';
 
 import HttpError from '../models/http-error';
 import Project from '../models/project';
@@ -84,4 +85,53 @@ export const changeStatus = async (req, res, next) => {
   }
 
   res.status(200).json({ project: updatedProject.toObject({ getters: true }) });
+};
+
+export const createProject = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return next(
+      new HttpError('Invalid inputs passed, please check your data.', 422),
+    );
+  }
+
+  const {
+    title,
+    name,
+    department,
+    shift,
+    type,
+    status,
+    currentSituation,
+    improvementSuggestion,
+    comments,
+    date,
+  } = req.body;
+
+  const createdProject = new Project({
+    title,
+    name,
+    department,
+    shift,
+    type,
+    status,
+    currentSituation,
+    improvementSuggestion,
+    comments,
+    date,
+  });
+
+  try {
+    await createdProject.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Creating project failed, please try again.',
+      401,
+    );
+    console.log(err);
+    return next(error);
+  }
+
+  res.status(201).json(createProject);
 };
