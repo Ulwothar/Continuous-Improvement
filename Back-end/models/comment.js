@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-  projectId: { type: ObjectId, required: true },
+  projectId: { type: String, required: true }, //for testing, will probably be changed for ObjectId type
   comment: { type: String, required: true },
 });
 
