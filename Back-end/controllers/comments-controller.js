@@ -19,11 +19,12 @@ export const showComments = async (req, res, next) => {
       404,
     );
     next(error);
+    res.json({ message: 'There are no comments for this suggestion.' });
+  } else {
+    res.json({
+      comments: comments.map((comment) => comment.toObject({ getters: true })),
+    });
   }
-
-  res.json({
-    comments: comments.map((comment) => comment.toObject({ getters: true })),
-  });
 };
 
 export const addComment = async (req, res, next) => {
@@ -52,4 +53,41 @@ export const addComment = async (req, res, next) => {
   }
 
   res.status(201).json(createdComment);
+};
+
+export const deleteComment = async (req, res, next) => {
+  const id = req.params.cid;
+
+  try {
+    await Comment.deleteOne({ _id: id });
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not delete this comment. Please try again.',
+      500,
+    );
+    next(error);
+  }
+
+  res.status(200).json({ message: 'Comment deleted.' });
+};
+
+export const updateComment = async (req, res, next) => {
+  const id = req.params.cid;
+  const comment = req.body;
+  let updatedComment;
+
+  try {
+    updatedComment = await Comment.findByIdAndUpdate(id, comment, {
+      new: true,
+      useFindAndModify: false,
+    });
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not update your comment',
+      500,
+    );
+    next(error);
+  }
+
+  res.status(200).json({ comment: updatedComment.toObject({ getters: true }) });
 };
