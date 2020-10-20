@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 let DUMMY_SUGGESTIONS = [
   {
     id: 's1',
@@ -77,8 +77,31 @@ export const updateComments = (props) => {
   DUMMY_SUGGESTIONS[suggestionIndex] = {};
 };
 
-const SavedProjects = () => {
-  return DUMMY_SUGGESTIONS;
+const SavedProjects = (props) => {
+  const status = props.status;
+
+  const [projects, setProjects] = useState([]);
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/api/projects/status/${status}`)
+  //     .then((res) => res.json())
+  //     .then(
+  //       (result) => {
+  //         //console.log(result);
+  //         setProjects(result.projects);
+  //       },
+  //       [projects],
+  //     );
+  // });
+
+  fetch(`http://localhost:5000/api/projects/status/${status}`)
+    .then((res) => res.json())
+    .then((result) => {
+      setProjects(result.projects);
+    });
+
+  //console.log(projects);
+  return projects;
 };
 
 export default SavedProjects;
