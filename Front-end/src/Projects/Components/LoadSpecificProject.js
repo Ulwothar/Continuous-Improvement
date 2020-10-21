@@ -10,11 +10,10 @@ const LoadSpecificProject = (props) => {
       .then((res) => res.json())
       .then((result) => {
         setSpecificProject([result.project]);
-        console.log(result.project);
+        //console.log(result.project);
       });
   }, [id]);
-  console.log(specificProject);
-  //return <div>Hi</div>;
+  //console.log(specificProject);
 
   return specificProject.map((project) => (
     <DisplayProject
