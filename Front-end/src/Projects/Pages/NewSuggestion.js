@@ -6,12 +6,11 @@ import {
   shiftSelect,
   wasteSelect,
 } from '../../shared/UIComponents/form-select';
-import { placeNewSuggestion } from '../Components/SavedProjects';
+import PlaceNewSuggestion from '../Components/PlaceNewSuggestion';
 import './NewSuggestion.css';
 
 let thisSuggestion = {
-  id: '',
-  userName: '',
+  name: '',
   department: 'RMP',
   shift: 'AM',
   type: 'defects',
@@ -49,16 +48,16 @@ const NewSuggestion = () => {
     // logic to be added when back and db are ready
     event.preventDefault(); //prevents site from reloading when submitting suggestion
     NewForm.date = Date().toString().slice(0, 24);
-    NewForm.id = Math.floor(Math.random() * 1000000).toString();
-    placeNewSuggestion(NewForm);
+    //NewForm.id = Math.floor(Math.random() * 1000000).toString();
+    PlaceNewSuggestion(NewForm);
     event.target.reset();
     console.log(NewForm);
     alert('Thank you for your suggestion!');
   };
 
-  useEffect(() => {
-    console.log(NewForm);
-  }, [NewForm]);
+  // useEffect(() => {
+  //   console.log(NewForm);
+  // }, [NewForm]);
 
   return (
     <div className="suggestion-form-container">

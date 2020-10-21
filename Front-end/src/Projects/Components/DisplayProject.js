@@ -35,9 +35,9 @@ const DisplayProject = (props) => {
     deleteComment(id);
   };
 
-  useEffect(() => {
-    console.log(comments);
-  }, [comments]);
+  // useEffect(() => {
+  //   console.log(comments);
+  // }, [comments]);
 
   useEffect(() => {
     //Updating project status when Select input is changed
