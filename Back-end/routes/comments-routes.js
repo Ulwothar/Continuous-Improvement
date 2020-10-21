@@ -10,12 +10,12 @@ import {
 
 const router = express.Router();
 
-router.get('/:pid', showComments); //Add middleware to get comments for specified project
+router.get('/:pid', showComments);
 
-router.post('/:pid', check('comment').notEmpty(), addComment); //Add middleware to post new comments for specified project
+router.post('/:pid', check('comment').notEmpty(), addComment);
 
-router.delete('/:cid', deleteComment); //Add middleware to delete specific comment
+router.delete('/:cid', deleteComment);
 
-router.patch('/:cid', check('comment').notEmpty(), updateComment); //Add middleware to update specific comment
+router.patch('/:cid', check('comment').notEmpty(), updateComment);
 
 export default router;

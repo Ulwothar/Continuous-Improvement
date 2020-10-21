@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Preview from './Preview';
 import DisplayProject from './DisplayProject';
@@ -7,6 +7,18 @@ import './LoadProjects.css';
 
 //this component will use the 'async/await get' method to get projects from back-end
 const LoadProjects = (props) => {
+  const [projects, setProjects] = useState([]);
+  const status = props.status;
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/projects/status/${status}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setProjects(result.projects);
+        console.log(status);
+      });
+  }, [status]);
+
   //   const LoadedProjects = SavedProjects();
   //   const chooseProjects = () => {
   //     if (props.status) {
@@ -60,26 +72,23 @@ const LoadProjects = (props) => {
   //   } else {
   //     return <h3>{props.message}</h3>;
   //   }
-  if (props.status) {
-    const status = props.status;
-    const loadedProjects = SavedProjects({ status });
-    //console.log('loadProject: ' + status);
-    return loadedProjects.map((project) => (
-      <Preview
-        key={project.id}
-        id={project.id}
-        title={project.title}
-        name={project.name}
-        department={project.department}
-        shift={project.shift}
-        type={project.type}
-        date={project.date}
-        currentSituation={project.currentSituation}
-        improvementSuggestion={project.improvementSuggestion}
-        comments={project.comments}
-      />
-    ));
-  }
+
+  //console.log('loadProject: ' + status);
+  return projects.map((project) => (
+    <Preview
+      key={project._id}
+      id={project._id}
+      title={project.title}
+      name={project.name}
+      department={project.department}
+      shift={project.shift}
+      type={project.type}
+      date={project.date}
+      currentSituation={project.currentSituation}
+      improvementSuggestion={project.improvementSuggestion}
+      comments={project.comments}
+    />
+  ));
 };
 
 export default LoadProjects;
