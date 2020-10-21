@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
-import { addComments, deleteComment, ViewComments } from './Comments';
+import { addComments, deleteComment } from './Comments';
 import { statusSelect } from '../../shared/UIComponents/form-select';
 import { changeStatus } from './SavedProjects';
 import './DisplayProject.css';
 
 const DisplayProject = (props) => {
   const [value, setValue] = useState(props.status); //State used to change status of project - NEED TO ADD OPTION TO DELETE PROJECT HERE!!!
-  const [comments, setComments] = useState(props.reviewerComments); //State used to change textarea with comments
+  const [comments, setComments] = useState(props.comment); //State used to change textarea with comments
+  const [reviewerComments, setReviewerComments] = useState([]);
   const id = props.id;
 
   const StatusChange = (statusValue) => {
@@ -35,9 +36,9 @@ const DisplayProject = (props) => {
     deleteComment(id);
   };
 
-  useEffect(() => {
-    console.log(comments);
-  }, [comments]);
+  // useEffect(() => {
+  //   console.log(comments);
+  // }, [comments]);
 
   useEffect(() => {
     //Updating project status when Select input is changed
@@ -61,6 +62,25 @@ const DisplayProject = (props) => {
       console.log(status);
     }
   }, [value.value, props.id]);
+
+  useEffect(() => {
+    try {
+      fetch(`http://localhost:5000/api/comments/${id}`)
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.comments) {
+            setReviewerComments(result.comments);
+            console.log(result.comments);
+          } else {
+            setReviewerComments(result);
+            console.log(result);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(reviewerComments);
+  }, [id]);
 
   const statusOptions = statusSelect();
   return (
@@ -113,14 +133,21 @@ const DisplayProject = (props) => {
         ) : (
           <></>
         )}
-        {ViewComments(id).length > 2 ? (
-          <>
-            <h4 className="description-label">Reviewer Comments:</h4>
-            <ViewComments id={id} key={id} />
-          </>
+
+        <h4 className="description-label">Reviewer Comments:</h4>
+        {/* <ViewComments id={id} key={id} /> */}
+        {reviewerComments.length > 0 ? (
+          reviewerComments.map((revComment) => (
+            <p className="reviewer-description-text" key={revComment._id}>
+              {revComment.comment}
+            </p>
+          ))
         ) : (
-          <></>
+          <p className="reviewer-description-text">
+            {reviewerComments.message}
+          </p>
         )}
+
         <form className="modify-project-form" onSubmit={submitHandler}>
           <label className="reviewer-label">
             <textarea
