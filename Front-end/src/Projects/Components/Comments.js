@@ -25,13 +25,24 @@ export const addComments = (props) => {
 
 //Takes prject id as prop and returns all comments made by reviewer to this project
 export const ViewComments = (props) => {
-  return DUMMY_COMMENTS.map((comments) =>
-    comments.projectId === props.id ? (
-      <p className="reviewer-description-text" key={comments.id}>
-        {comments.reviewerComment}
-      </p>
-    ) : null,
-  );
+  // return DUMMY_COMMENTS.map((comments) =>
+  //   comments.projectId === props.id ? (
+  //     <p className="reviewer-description-text" key={comments.id}>
+  //       {comments.reviewerComment}
+  //     </p>
+  //   ) : null,
+  // );
+  // const id = props.id;
+  // let reviewerComments;
+  // try {
+  //   fetch(`http://localhost:5000/api/comments/${id}`)
+  //     .then((res) => res.json())
+  //     .then((result) => (reviewerComments = result.comments));
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  // console.log(reviewerComments);
+  // return <p>does it work?</p>;
 };
 
 //Takes comment id, finds it's index and removes it

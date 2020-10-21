@@ -13,6 +13,22 @@ const LoadSpecificProject = (props) => {
         //console.log(result.project);
       });
   }, [id]);
+
+  //   useEffect(() => {
+  //     fetch(`http://localhost:5000/api/comments/${id}`)
+  //       .then((res) => res.json())
+  //       .then((result) => {
+  //         if (result.comment) {
+  //           const comment = result.comment;
+  //           setSpecificProject(...specificProject, [comment]);
+  //         } else {
+  //           const comment = result.message;
+  //           setSpecificProject(...specificProject, [comment]);
+  //         }
+
+  //         //console.log(result.project);
+  //       });
+  //   }, [id]);
   //console.log(specificProject);
 
   return specificProject.map((project) => (
@@ -29,6 +45,7 @@ const LoadSpecificProject = (props) => {
       currentSituation={project.currentSituation}
       improvementSuggestion={project.improvementSuggestion}
       comments={project.comments}
+      comment={project.comment}
     />
   ));
 };
