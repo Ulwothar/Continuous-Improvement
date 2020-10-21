@@ -35,16 +35,30 @@ const DisplayProject = (props) => {
     deleteComment(id);
   };
 
-  // useEffect(() => {
-  //   console.log(comments);
-  // }, [comments]);
+  useEffect(() => {
+    console.log(comments);
+  }, [comments]);
 
   useEffect(() => {
     //Updating project status when Select input is changed
     if (value.value) {
       const id = props.id;
       const status = value.value;
-      changeStatus({ id: id, status: status });
+      //changeStatus({ id: id, status: status });
+      try {
+        fetch(`http://localhost:5000/api/projects/status/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            status: status,
+          }),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      console.log(status);
     }
   }, [value.value, props.id]);
 
