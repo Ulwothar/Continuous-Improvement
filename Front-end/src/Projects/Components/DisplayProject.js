@@ -8,7 +8,7 @@ import './DisplayProject.css';
 
 const DisplayProject = (props) => {
   const [value, setValue] = useState(props.status); //State used to change status of project - NEED TO ADD OPTION TO DELETE PROJECT HERE!!!
-  const [comments, setComments] = useState(props.comment); //State used to change textarea with comments
+  const [comments, setComments] = useState(''); //State used to change textarea with comments
   const [reviewerComments, setReviewerComments] = useState([]);
   const id = props.id;
 
@@ -22,13 +22,26 @@ const DisplayProject = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    let commentId = Math.floor(Math.random() * 1000000).toString();
+    //let commentId = Math.floor(Math.random() * 1000000).toString();
     const newComment = {
-      id: `${commentId}`,
       projectId: `${props.id}`,
-      reviewerComment: `${comments}`,
+      comment: `${comments}`,
     };
     addComments(newComment);
+    try {
+      fetch(`http://localhost:5000/api/comments/${id}`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          projectId: id,
+          comment: comments,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
     event.target.reset();
   };
 
@@ -153,6 +166,7 @@ const DisplayProject = (props) => {
             <textarea
               className="reviewer-comments-textarea"
               placeholder="Type any comments to this project"
+              required
               onChange={changeHandler}
             />
             <button type="submit" className="reviewer-submit-button">
