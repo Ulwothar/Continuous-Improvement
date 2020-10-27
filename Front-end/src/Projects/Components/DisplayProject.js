@@ -165,9 +165,26 @@ const DisplayProject = (props) => {
         {/* <ViewComments id={id} key={id} /> */}
         {reviewerComments.length > 0 ? (
           reviewerComments.map((revComment) => (
-            <p className="reviewer-description-text" key={revComment._id}>
-              {revComment.comment}
-            </p>
+            <span>
+              <p className="reviewer-description-text" key={revComment._id}>
+                {revComment.comment}
+              </p>
+              <button
+                className="delete-comment-button"
+                onClick={() =>
+                  fetch(
+                    `http://localhost:5000/api/comments/${revComment._id}`,
+                    {
+                      method: 'DELETE',
+                      headers: {
+                        'content-type': 'application/json',
+                      },
+                    },
+                  )
+                }>
+                DELETE
+              </button>
+            </span>
           ))
         ) : (
           <p className="reviewer-description-text">
