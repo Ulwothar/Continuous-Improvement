@@ -112,3 +112,21 @@ textarea {
   color: rgb(28, 53, 134);
   cursor: pointer;
 }
+
+.delete-comment-button {
+  background-color: rgb(235, 235, 50);
+  height: 55px;
+  width: 120px;
+  color: rgb(44, 89, 236);
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  display: block;
+  margin: 1rem 0 2rem auto;
+}
+
+.delete-comment-button:hover {
+  background-color: rgb(219, 181, 9);
+  color: rgb(28, 53, 134);
+  cursor: pointer;
+}
