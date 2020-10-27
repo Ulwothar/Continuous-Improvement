@@ -45,8 +45,17 @@ const DisplayProject = (props) => {
     event.target.reset();
   };
 
-  const deleteCommentHandler = (event) => {
-    deleteComment(id);
+  const deleteProjectHandler = () => {
+    try {
+      fetch(`http://localhost:5000/api/projects/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'applicaton/json',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // useEffect(() => {
@@ -119,20 +128,25 @@ const DisplayProject = (props) => {
           <p>{props.type}</p>
         </label>
       </span>
-
-      <label>
-        Status:
-        <div className="status-select">
-          <Select
-            name="status"
-            isSearchable={false}
-            onChange={StatusChange}
-            className="status-select-button"
-            options={statusOptions}
-            defaultValue={{ label: value, value: value }}></Select>
-        </div>
-      </label>
-
+      <span>
+        <label>
+          Status:
+          <div className="status-select">
+            <Select
+              name="status"
+              isSearchable={false}
+              onChange={StatusChange}
+              className="status-select-button"
+              options={statusOptions}
+              defaultValue={{ label: value, value: value }}></Select>
+          </div>
+        </label>
+        <button
+          className="delete-project-button"
+          onClick={deleteProjectHandler}>
+          DELETE
+        </button>
+      </span>
       <div className="suggestion-description">
         <h4 className="description-label">Current situation:</h4>
         <p className="description-text">{props.currentSituation}</p>
