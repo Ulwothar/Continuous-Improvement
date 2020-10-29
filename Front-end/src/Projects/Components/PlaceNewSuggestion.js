@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-
 const PlaceNewSuggestion = async (props) => {
   try {
     const request = await fetch(`http://localhost:5000/api/projects/`, {

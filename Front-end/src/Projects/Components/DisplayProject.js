@@ -168,22 +168,23 @@ const DisplayProject = (props) => {
             <span>
               <p className="reviewer-description-text" key={revComment._id}>
                 {revComment.comment}
-              </p>
-              <button
-                className="delete-comment-button"
-                onClick={() =>
-                  fetch(
-                    `http://localhost:5000/api/comments/${revComment._id}`,
-                    {
-                      method: 'DELETE',
-                      headers: {
-                        'content-type': 'application/json',
+
+                <button
+                  className="delete-comment-button"
+                  onClick={() =>
+                    fetch(
+                      `http://localhost:5000/api/comments/${revComment._id}`,
+                      {
+                        method: 'DELETE',
+                        headers: {
+                          'content-type': 'application/json',
+                        },
                       },
-                    },
-                  )
-                }>
-                DELETE
-              </button>
+                    )
+                  }>
+                  DELETE
+                </button>
+              </p>
             </span>
           ))
         ) : (

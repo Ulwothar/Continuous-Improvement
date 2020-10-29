@@ -82,25 +82,12 @@ const SavedProjects = (props) => {
 
   const [projects, setProjects] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/api/projects/status/${status}`)
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         //console.log(result);
-  //         setProjects(result.projects);
-  //       },
-  //       [projects],
-  //     );
-  // });
-
   fetch(`http://localhost:5000/api/projects/status/${status}`)
     .then((res) => res.json())
     .then((result) => {
       setProjects(result.projects);
     });
 
-  //console.log(projects);
   return projects;
 };
 
