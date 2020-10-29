@@ -2,6 +2,7 @@ import { validationResult } from 'express-validator';
 
 import HttpError from '../models/http-error';
 import Project from '../models/project';
+import Comment from '../models/comment';
 
 export const getProjectById = async (req, res, next) => {
   const projectId = req.params.pid;
@@ -54,6 +55,7 @@ export const deleteProject = async (req, res, next) => {
 
   try {
     await Project.deleteOne({ _id: projectId });
+    await Comment.deleteMany({ projectId: projectId });
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not delete this project!',
