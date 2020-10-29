@@ -5,6 +5,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import dotenv from 'dotenv';
 
 import MainNavigation from './shared/components/MainNavigation';
 import NewSuggestion from './Projects/Pages/NewSuggestion';
@@ -17,6 +18,7 @@ import { AuthContext } from './shared/context/AuthContext';
 import './App.css';
 
 function App() {
+  dotenv.config();
   const [isLogged, setIsLogged] = useState(false);
 
   const login = useCallback(() => {

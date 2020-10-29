@@ -96,10 +96,10 @@ textarea {
 }
 
 .delete-project-button {
-  background-color: rgb(235, 235, 50);
+  background-color:rgb(235, 103, 103);
   height: 55px;
   width: 120px;
-  color: rgb(44, 89, 236);
+  color:  rgb(7, 30, 107);
   font-weight: bold;
   text-align: center;
   position: relative;
@@ -108,16 +108,16 @@ textarea {
 }
 
 .delete-project-button:hover {
-  background-color: rgb(219, 181, 9);
-  color: rgb(28, 53, 134);
+  background-color: rgb(185, 10, 10);
+  color: rgb(198, 207, 235);
   cursor: pointer;
 }
 
 .delete-comment-button {
-  background-color: rgb(235, 235, 50);
+  background-color: rgb(235, 103, 103);
   height: 55px;
   width: 120px;
-  color: rgb(44, 89, 236);
+  color: rgb(7, 30, 107);
   font-weight: bold;
   text-align: center;
   position: relative;
@@ -126,7 +126,7 @@ textarea {
 }
 
 .delete-comment-button:hover {
-  background-color: rgb(219, 181, 9);
-  color: rgb(28, 53, 134);
+  background-color: rgb(185, 10, 10);
+  color: rgb(198, 207, 235);
   cursor: pointer;
 }
