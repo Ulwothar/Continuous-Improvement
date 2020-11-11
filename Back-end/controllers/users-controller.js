@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { validationResult } from 'express-validator';
 import HttpError from '../models/http-error';
 import User from '../models/user';
+const jwt = require('jsonwebtoken');
 
 export const userRegister = async (req, res, next) => {
   const errors = validationResult(req);
@@ -45,10 +46,11 @@ export const userLogin = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422),
     );
   }
+  //const jwt = new JsonWebToken();
 
   const password = req.body.password;
   const login = req.body.login;
-  const user = new User({ login, password });
+  const user = { login: login, password: password };
 
   try {
     const checkUser = await User.findOne({ login: login });
@@ -59,7 +61,12 @@ export const userLogin = async (req, res, next) => {
     }
 
     if (await bcrypt.compare(password, checkUser.password)) {
-      res.send({ message: `Welcome ${checkUser.login}` });
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: '15m',
+      });
+      const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+      res.send({ accessToken: accessToken, refreshToken: refreshToken });
+      //res.send({ message: `Welcome ${checkUser.login}` });
     } else {
       res.send({ message: 'Invalid password.' });
     }
