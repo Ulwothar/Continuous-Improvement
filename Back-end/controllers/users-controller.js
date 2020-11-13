@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { validationResult } from 'express-validator';
 import HttpError from '../models/http-error';
 import User from '../models/user';
+import { CreateTokens } from './tokens-controller';
 const jwt = require('jsonwebtoken');
 
 export const userRegister = async (req, res, next) => {
@@ -61,11 +62,15 @@ export const userLogin = async (req, res, next) => {
     }
 
     if (await bcrypt.compare(password, checkUser.password)) {
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '15m',
+      // const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+      //   expiresIn: '15m',
+      // });
+      // const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+      const tokens = CreateTokens(user);
+      res.send({
+        tokens,
+        message: checkUser.login,
       });
-      const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-      res.send({ accessToken: accessToken, refreshToken: refreshToken });
       //res.send({ message: `Welcome ${checkUser.login}` });
     } else {
       res.send({ message: 'Invalid password.' });
