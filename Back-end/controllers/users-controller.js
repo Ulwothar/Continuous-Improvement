@@ -66,10 +66,10 @@ export const userLogin = async (req, res, next) => {
       //   expiresIn: '15m',
       // });
       // const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-      const tokens = CreateTokens(user);
+      const tokens = await CreateTokens(user);
       res.send({
         tokens,
-        message: checkUser.login,
+        user: checkUser.login,
       });
       //res.send({ message: `Welcome ${checkUser.login}` });
     } else {

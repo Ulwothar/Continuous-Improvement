@@ -44,10 +44,8 @@ export const CreateTokens = async (user) => {
   const tokens = { accessToken: accessToken, refreshToken: refreshToken };
   try {
     await token.save();
-    console.log(accessToken);
-    console.log(refreshToken);
-    return tokens;
   } catch (err) {
     console.log(err);
   }
+  return tokens;
 };
