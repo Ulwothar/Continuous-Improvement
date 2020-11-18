@@ -51,7 +51,7 @@ export const userLogin = async (req, res, next) => {
 
   const password = req.body.password;
   const login = req.body.login;
-  const user = { login: login, password: password };
+  const user = { login: login };
 
   try {
     const checkUser = await User.findOne({ login: login });

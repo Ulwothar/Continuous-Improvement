@@ -6,6 +6,13 @@ function genereateToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 }
 
+export const CheckToken = async (token) => {
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
+    if (err) return false;
+    else return true;
+  });
+};
+
 export const RefreshAccessToken = async (token, user) => {
   if (token == null) return null;
   try {
@@ -21,10 +28,7 @@ export const RefreshAccessToken = async (token, user) => {
       return accessToken;
     });
   } catch (err) {
-    const error = new HttpError(
-      'Internal server error, please try again later',
-      500,
-    );
+    return err;
   }
 };
 

@@ -1,4 +1,5 @@
 import { validationResult } from 'express-validator';
+import { CheckToken, RefreshAccessToken } from './tokens-controller';
 
 import HttpError from '../models/http-error';
 import Project from '../models/project';
@@ -6,6 +7,23 @@ import Comment from '../models/comment';
 
 export const getProjectById = async (req, res, next) => {
   const projectId = req.params.pid;
+  let accessToken = req.headers['accesstoken'];
+  const refreshToken = req.headers['refreshtoken'];
+  const user = req.header.user;
+
+  //console.log(refreshToken);
+  let accessTokenValid = await CheckToken(accessToken);
+  console.log(accessTokenValid);
+  if (accessTokenValid === false) {
+    let newAccessToken = await RefreshAccessToken(refreshToken, user);
+    newAccessToken != null
+      ? (accessToken = newAccessToken)
+      : res.json({
+          message:
+            'Something is wrong and you may not be authenticated. Please contact server admin for more details.',
+        });
+  }
+
   let project;
   try {
     project = await Project.findById(projectId);
@@ -26,7 +44,10 @@ export const getProjectById = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ project: project.toObject({ getters: true }) });
+  res.json({
+    project: project.toObject({ getters: true }),
+    accessToken: accessToken,
+  });
 };
 
 export const getProjectsByStatus = async (req, res, next) => {
