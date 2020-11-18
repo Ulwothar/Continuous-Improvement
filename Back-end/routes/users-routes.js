@@ -18,4 +18,6 @@ router.post(
   userLogin,
 );
 
+router.delete('/logout');
+
 export default router;
