@@ -9,19 +9,23 @@ export const getProjectById = async (req, res, next) => {
   const projectId = req.params.pid;
   let accessToken = req.headers['accesstoken'];
   const refreshToken = req.headers['refreshtoken'];
-  const user = req.header.user;
-
+  const login = req.headers['user'];
+  const user = { login: login };
+  //let accessTokenValid = false;
   //console.log(refreshToken);
   let accessTokenValid = await CheckToken(accessToken);
   console.log(accessTokenValid);
   if (accessTokenValid === false) {
     let newAccessToken = await RefreshAccessToken(refreshToken, user);
-    newAccessToken != null
-      ? (accessToken = newAccessToken)
-      : res.json({
-          message:
-            'Something is wrong and you may not be authenticated. Please contact server admin for more details.',
-        });
+    console.log({ newAccessToken: newAccessToken });
+    if (newAccessToken != null) {
+      accessToken = newAccessToken;
+    } else {
+      return res.json({
+        message:
+          'Something went wrong and we could not authenticate you. If this problem persists, please contact server administrator.',
+      });
+    }
   }
 
   let project;
