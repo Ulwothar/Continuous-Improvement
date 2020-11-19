@@ -18,7 +18,6 @@ export const CheckToken = async (token) => {
 
 export const RefreshAccessToken = async (token, user) => {
   if (token == null) return null;
-  let accessToken;
   try {
     const refreshToken = await Token.findOne({
       refreshToken: token,
@@ -28,25 +27,19 @@ export const RefreshAccessToken = async (token, user) => {
       console.log('Refresh token does not exist!');
       return null;
     }
-    //console.log({ refreshToken: refreshToken.refreshToken });   //Checking if I'm getting correct info from DB
 
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) {
         console.log('Something went wrong, could not verify your tokens!');
         return err;
       }
-      accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '30000',
-      });
-
-      //console.log(accessToken);     //Checking if I'm correctly getting to this point and generating new access token
-      //return genereateToken(user);
     });
+    const accessToken = genereateToken(user);
+    console.log({ token: accessToken });
+    return accessToken;
   } catch (err) {
     return err;
   }
-
-  return accessToken;
 };
 
 export const DeleteToken = async (token, user) => {
