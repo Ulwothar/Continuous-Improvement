@@ -35,7 +35,6 @@ export const RefreshAccessToken = async (token, user) => {
       }
     });
     const accessToken = genereateToken(user);
-    console.log({ token: accessToken });
     return accessToken;
   } catch (err) {
     return err;
