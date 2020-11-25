@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator';
 import { CheckToken, RefreshAccessToken } from './tokens-controller';
+import Cookies from 'cookies';
 
 import HttpError from '../models/http-error';
 import Project from '../models/project';
@@ -26,6 +27,8 @@ export const getProjectById = async (req, res, next) => {
       });
     }
   }
+  let cookies = new Cookies(req, res);
+  cookies.set('accessToken', accessToken);
 
   let project;
   try {
@@ -49,7 +52,6 @@ export const getProjectById = async (req, res, next) => {
 
   res.json({
     project: project.toObject({ getters: true }),
-    accessToken: accessToken,
   });
 };
 
@@ -75,6 +77,9 @@ export const getProjectsByStatus = async (req, res, next) => {
       });
     }
   }
+
+  let cookies = new Cookies(req, res);
+  cookies.set('accessToken', accessToken);
 
   let projects;
   try {
@@ -118,6 +123,9 @@ export const deleteProject = async (req, res, next) => {
     }
   }
 
+  let cookies = new Cookies(req, res);
+  cookies.set('accessToken', accessToken);
+
   try {
     await Project.deleteOne({ _id: projectId });
     await Comment.deleteMany({ projectId: projectId });
@@ -158,6 +166,9 @@ export const changeStatus = async (req, res, next) => {
     }
   }
 
+  let cookies = new Cookies(req, res);
+  cookies.set('accessToken', accessToken);
+
   try {
     updatedProject = await Project.findByIdAndUpdate(projectId, status, {
       new: true,
@@ -175,26 +186,6 @@ export const changeStatus = async (req, res, next) => {
 };
 
 export const createProject = async (req, res, next) => {
-  let accessToken = req.headers['accesstoken'];
-  const refreshToken = req.headers['refreshtoken'];
-  const login = req.headers['user'];
-  const user = { login: login };
-  //Need to find a way to automate this - DRY
-  let accessTokenValid = await CheckToken(accessToken);
-  console.log(accessTokenValid); //just for testing
-  if (accessTokenValid === false) {
-    let newAccessToken = await RefreshAccessToken(refreshToken, user);
-    console.log({ newAccessToken: newAccessToken }); //just for testing
-    if (newAccessToken != null) {
-      accessToken = newAccessToken;
-    } else {
-      return res.json({
-        message:
-          'Something went wrong and we could not authenticate you. If this problem persists, please contact server administrator.',
-      });
-    }
-  }
-
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors);
