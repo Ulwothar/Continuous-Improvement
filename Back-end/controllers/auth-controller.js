@@ -1,9 +1,10 @@
 import { CheckToken, RefreshAccessToken } from './tokens-controller';
-//Not working yet, need to find a way to work thiss out
-export const AuthoriseUser = async (req, res) => {
-  let accessToken = req.accessToken;
-  const refreshToken = req.refreshToken;
-  const login = req.login;
+import Cookies from 'cookies';
+//Not working yet, need to find a way to work this out
+export const AuthoriseUser = async (req, res, next) => {
+  let accessToken = req.headers['accesstoken'];
+  const refreshToken = req.headers['refreshtoken'];
+  const login = req.headers['user'];
   const user = { login: login };
   let accessTokenValid = await CheckToken(accessToken);
   console.log(accessTokenValid);
@@ -12,7 +13,6 @@ export const AuthoriseUser = async (req, res) => {
     console.log({ newAccessToken: newAccessToken });
     if (newAccessToken != null) {
       accessToken = newAccessToken;
-      return accessToken;
     } else {
       return res.json({
         message:
@@ -20,5 +20,7 @@ export const AuthoriseUser = async (req, res) => {
       });
     }
   }
-  return null;
+  let cookies = new Cookies(req, res);
+  cookies.set('accessToken', accessToken);
+  next();
 };

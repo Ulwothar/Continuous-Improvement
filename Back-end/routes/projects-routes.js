@@ -9,11 +9,13 @@ import {
   getProjectsByStatus,
 } from '../controllers/projects-controller';
 
+import { AuthoriseUser } from '../controllers/auth-controller';
+
 const router = express.Router();
 
-router.get('/status/:status', getProjectsByStatus);
+router.get('/status/:status', AuthoriseUser, getProjectsByStatus);
 
-router.patch('/status/:pid', changeStatus);
+router.patch('/status/:pid', AuthoriseUser, changeStatus);
 
 router.post(
   '/',
@@ -28,8 +30,8 @@ router.post(
   createProject,
 );
 
-router.delete('/:pid', deleteProject);
+router.delete('/:pid', AuthoriseUser, deleteProject);
 
-router.get('/:pid', getProjectById);
+router.get('/:pid', AuthoriseUser, getProjectById);
 
 export default router;
