@@ -1,6 +1,4 @@
 import { validationResult } from 'express-validator';
-import { CheckToken, RefreshAccessToken } from './tokens-controller';
-import Cookies from 'cookies';
 
 import HttpError from '../models/http-error';
 import Project from '../models/project';
@@ -8,27 +6,6 @@ import Comment from '../models/comment';
 
 export const getProjectById = async (req, res, next) => {
   const projectId = req.params.pid;
-  let accessToken = req.headers['accesstoken'];
-  const refreshToken = req.headers['refreshtoken'];
-  const login = req.headers['user'];
-  const user = { login: login };
-  //Need to find a way to automate this - DRY
-  let accessTokenValid = await CheckToken(accessToken);
-  console.log(accessTokenValid); //just for testing
-  if (accessTokenValid === false) {
-    let newAccessToken = await RefreshAccessToken(refreshToken, user);
-    console.log({ newAccessToken: newAccessToken }); //just for testing
-    if (newAccessToken != null) {
-      accessToken = newAccessToken;
-    } else {
-      return res.json({
-        message:
-          'Something went wrong and we could not authenticate you. If this problem persists, please contact server administrator.',
-      });
-    }
-  }
-  let cookies = new Cookies(req, res);
-  cookies.set('accessToken', accessToken);
 
   let project;
   try {
@@ -58,29 +35,6 @@ export const getProjectById = async (req, res, next) => {
 export const getProjectsByStatus = async (req, res, next) => {
   const status = req.params.status;
 
-  let accessToken = req.headers['accesstoken'];
-  const refreshToken = req.headers['refreshtoken'];
-  const login = req.headers['user'];
-  const user = { login: login };
-  //Need to find a way to automate this - DRY
-  let accessTokenValid = await CheckToken(accessToken);
-  console.log(accessTokenValid); //just for testing
-  if (accessTokenValid === false) {
-    let newAccessToken = await RefreshAccessToken(refreshToken, user);
-    console.log({ newAccessToken: newAccessToken }); //just for testing
-    if (newAccessToken != null) {
-      accessToken = newAccessToken;
-    } else {
-      return res.json({
-        message:
-          'Something went wrong and we could not authenticate you. If this problem persists, please contact server administrator.',
-      });
-    }
-  }
-
-  let cookies = new Cookies(req, res);
-  cookies.set('accessToken', accessToken);
-
   let projects;
   try {
     projects = await Project.find({ status: status });
@@ -102,30 +56,6 @@ export const getProjectsByStatus = async (req, res, next) => {
 
 export const deleteProject = async (req, res, next) => {
   const projectId = req.params.pid;
-
-  let accessToken = req.headers['accesstoken'];
-  const refreshToken = req.headers['refreshtoken'];
-  const login = req.headers['user'];
-  const user = { login: login };
-  //Need to find a way to automate this - DRY
-  let accessTokenValid = await CheckToken(accessToken);
-  console.log(accessTokenValid); //just for testing
-  if (accessTokenValid === false) {
-    let newAccessToken = await RefreshAccessToken(refreshToken, user);
-    console.log({ newAccessToken: newAccessToken }); //just for testing
-    if (newAccessToken != null) {
-      accessToken = newAccessToken;
-    } else {
-      return res.json({
-        message:
-          'Something went wrong and we could not authenticate you. If this problem persists, please contact server administrator.',
-      });
-    }
-  }
-
-  let cookies = new Cookies(req, res);
-  cookies.set('accessToken', accessToken);
-
   try {
     await Project.deleteOne({ _id: projectId });
     await Comment.deleteMany({ projectId: projectId });
@@ -145,29 +75,6 @@ export const changeStatus = async (req, res, next) => {
   const status = req.body;
   const projectId = req.params.pid;
   let updatedProject;
-
-  let accessToken = req.headers['accesstoken'];
-  const refreshToken = req.headers['refreshtoken'];
-  const login = req.headers['user'];
-  const user = { login: login };
-  //Need to find a way to automate this - DRY
-  let accessTokenValid = await CheckToken(accessToken);
-  console.log(accessTokenValid); //just for testing
-  if (accessTokenValid === false) {
-    let newAccessToken = await RefreshAccessToken(refreshToken, user);
-    console.log({ newAccessToken: newAccessToken }); //just for testing
-    if (newAccessToken != null) {
-      accessToken = newAccessToken;
-    } else {
-      return res.json({
-        message:
-          'Something went wrong and we could not authenticate you. If this problem persists, please contact server administrator.',
-      });
-    }
-  }
-
-  let cookies = new Cookies(req, res);
-  cookies.set('accessToken', accessToken);
 
   try {
     updatedProject = await Project.findByIdAndUpdate(projectId, status, {
