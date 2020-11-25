@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator';
 import HttpError from '../models/http-error';
 import User from '../models/user';
 import { CreateTokens } from './tokens-controller';
-const jwt = require('jsonwebtoken');
+import Cookies from 'cookies';
 
 export const userRegister = async (req, res, next) => {
   const errors = validationResult(req);
@@ -67,9 +67,12 @@ export const userLogin = async (req, res, next) => {
       // });
       // const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
       const tokens = await CreateTokens(user);
+      const cookies = new Cookies(req, res);
+      cookies.set('accessToken', tokens.accessToken);
+      cookies.set('refreshToken', tokens.refreshToken);
+      cookies.set('user', checkUser.login);
       res.send({
-        tokens,
-        user: checkUser.login,
+        message: 'Logging successful!',
       });
       //res.send({ message: `Welcome ${checkUser.login}` });
     } else {

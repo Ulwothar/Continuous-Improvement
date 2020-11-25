@@ -1,5 +1,6 @@
 import express from 'express';
 import { check } from 'express-validator';
+import { AuthoriseUser } from '../controllers/auth-controller';
 
 import {
   addComment,
@@ -10,12 +11,17 @@ import {
 
 const router = express.Router();
 
-router.get('/:pid', showComments);
+router.get('/:pid', AuthoriseUser, showComments);
 
-router.post('/:pid', check('comment').notEmpty(), addComment);
+router.post('/:pid', check('comment').notEmpty(), AuthoriseUser, addComment);
 
-router.delete('/:cid', deleteComment);
+router.delete('/:cid', AuthoriseUser, deleteComment);
 
-router.patch('/:cid', check('comment').notEmpty(), updateComment);
+router.patch(
+  '/:cid',
+  check('comment').notEmpty(),
+  AuthoriseUser,
+  updateComment,
+);
 
 export default router;
