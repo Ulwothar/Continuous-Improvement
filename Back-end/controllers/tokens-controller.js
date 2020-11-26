@@ -54,11 +54,26 @@ export const CreateTokens = async (user) => {
   const accessToken = genereateToken(user);
   const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
   const token = new Token({ name: user.login, refreshToken });
-  const tokens = { accessToken: accessToken, refreshToken: refreshToken };
-  try {
-    await token.save();
-  } catch (err) {
-    console.log(err);
+  const checkToken = Token.find({ name: user.login });
+  if (!checkToken) {
+    try {
+      await token.save();
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    try {
+      await Token.findOneAndUpdate(
+        { name: user.login },
+        { refreshToken: refreshToken },
+        { new: true, useFindAndModify: false },
+      );
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  const tokens = { accessToken: accessToken, refreshToken: refreshToken };
+
   return tokens;
 };

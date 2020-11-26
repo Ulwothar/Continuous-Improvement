@@ -70,7 +70,7 @@ export const userLogin = async (req, res, next) => {
       const cookies = new Cookies(req, res);
       cookies.set('accessToken', tokens.accessToken);
       cookies.set('refreshToken', tokens.refreshToken);
-      cookies.set('user', checkUser.login);
+      cookies.set('user', checkUser.login, { httpOnly: false });
       res.send({
         message: 'Logging successful!',
       });

@@ -2,8 +2,8 @@ import { CheckToken, RefreshAccessToken } from './tokens-controller';
 import Cookies from 'cookies';
 //Not working yet, need to find a way to work this out
 export const AuthoriseUser = async (req, res, next) => {
-  let accessToken = req.headers['accesstoken'];
-  const refreshToken = req.headers['refreshtoken'];
+  let accessToken = req.headers['accessToken'];
+  const refreshToken = req.headers['refreshToken'];
   const login = req.headers['user'];
   const user = { login: login };
   let accessTokenValid = await CheckToken(accessToken);
