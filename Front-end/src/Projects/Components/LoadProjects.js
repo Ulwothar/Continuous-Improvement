@@ -15,12 +15,10 @@ const LoadProjects = (props) => {
       credentials: 'include',
     })
       .then((res) => {
-        //console.log(res);
         return res.json();
       })
       .then((result) => {
         setProjects(result.projects);
-        //console.log(result);
       });
   }, [status]);
 

@@ -60,10 +60,6 @@ const DisplayProject = (props) => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(comments);
-  // }, [comments]);
-
   useEffect(() => {
     //Updating project status when Select input is changed
     if (value.value) {
