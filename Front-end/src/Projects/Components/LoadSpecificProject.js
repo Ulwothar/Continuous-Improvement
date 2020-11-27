@@ -6,7 +6,9 @@ const LoadSpecificProject = (props) => {
   const [specificProject, setSpecificProject] = useState([]);
   const id = props.id;
   useEffect(() => {
-    fetch(`http://localhost:5000/api/projects/${id}`)
+    fetch(`http://localhost:5000/api/projects/${id}`, {
+      credentials: 'include',
+    })
       .then((res) => res.json())
       .then((result) => {
         setSpecificProject([result.project]);

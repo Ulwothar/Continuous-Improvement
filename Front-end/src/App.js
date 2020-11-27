@@ -63,7 +63,7 @@ function App() {
         <Route path="/projects/:pid" exact>
           <ReviewSuggestion />
         </Route>
-        <Redirect to="/new" />
+        <Redirect to="/" />
       </Switch>
     );
   }
