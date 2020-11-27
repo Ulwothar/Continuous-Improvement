@@ -47,7 +47,6 @@ export const userLogin = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422),
     );
   }
-  //const jwt = new JsonWebToken();
 
   const password = req.body.password;
   const login = req.body.login;
