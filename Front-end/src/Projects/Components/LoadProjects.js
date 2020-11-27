@@ -12,13 +12,6 @@ const LoadProjects = (props) => {
   useEffect(() => {
     fetch(`http://localhost:5000/api/projects/status/${status}`, {
       method: 'GET',
-      headers: {
-        accesstoken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Ik1hdGV1c3oiLCJpYXQiOjE2MDY1MTI5MDEsImV4cCI6MTYwNjUxMjkzMX0.G0agpUzi1y1oSnSBXc7wLmZuthEOrWa07m8CfFBVz34',
-        refreshtoken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Ik1hdGV1c3oiLCJpYXQiOjE2MDY1MTI5MDF9.7oAHVTmTznj4YWI3EKjEP_cC7Ngwf6L_E-wK6p96XM8',
-        user: 'Mateusz',
-      },
       credentials: 'include',
     })
       .then((res) => {
