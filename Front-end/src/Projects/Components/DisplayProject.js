@@ -34,6 +34,7 @@ const DisplayProject = (props) => {
         headers: {
           'content-type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           projectId: id,
           comment: comments,
@@ -87,7 +88,9 @@ const DisplayProject = (props) => {
 
   useEffect(() => {
     try {
-      fetch(`http://localhost:5000/api/comments/${id}`)
+      fetch(`http://localhost:5000/api/comments/${id}`, {
+        credentials: 'include',
+      })
         .then((res) => res.json())
         .then((result) => {
           if (result.comments) {
@@ -179,6 +182,7 @@ const DisplayProject = (props) => {
                         headers: {
                           'content-type': 'application/json',
                         },
+                        credentials: 'include',
                       },
                     )
                   }>

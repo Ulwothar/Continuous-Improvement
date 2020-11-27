@@ -14,20 +14,24 @@ const LoadProjects = (props) => {
       method: 'GET',
       headers: {
         accesstoken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Ik1hdHQiLCJpYXQiOjE2MDYyNjQ0NDMsImV4cCI6MTYwNjI2NDQ3M30.uOsi7Ui1I-s8yAAflIngk9K0hGKYppqPGEce2NEtPdg',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Ik1hdGV1c3oiLCJpYXQiOjE2MDY1MTI5MDEsImV4cCI6MTYwNjUxMjkzMX0.G0agpUzi1y1oSnSBXc7wLmZuthEOrWa07m8CfFBVz34',
         refreshtoken:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Ik1hdHQiLCJpYXQiOjE2MDU4Mjk0MzV9.kv3UcpSnZz3XZLpWDmlXIlzgBf2XW0PAQii0mrLhdoE',
-        user: 'Matt',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6Ik1hdGV1c3oiLCJpYXQiOjE2MDY1MTI5MDF9.7oAHVTmTznj4YWI3EKjEP_cC7Ngwf6L_E-wK6p96XM8',
+        user: 'Mateusz',
       },
-      credentials: 'same-origin',
+      credentials: 'include',
     })
-      .then((res) => res.json())
+      .then((res) => {
+        //console.log(res);
+        return res.json();
+      })
       .then((result) => {
         setProjects(result.projects);
-        //console.log(status);
+        //console.log(result);
       });
   }, [status]);
 
+  //console.log(document.cookie);
   return projects.map((project) => (
     <Preview
       key={project._id}

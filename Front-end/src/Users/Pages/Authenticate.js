@@ -27,12 +27,29 @@ const Authenticate = () => {
     }
   };
 
-  const logInSubmitHandler = (event) => {
+  const logInSubmitHandler = async (event) => {
     event.preventDefault();
+    try {
+      const login = await fetch('http://localhost:5000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          login: userDetails.userName,
+          password: userDetails.password,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     if (
       userDetails.userName === DUMMY_USER.name &&
       userDetails.password === DUMMY_USER.password
     ) {
+      console.log(document.cookie);
       auth.login();
     } else {
       console.log('Wrong username or password'); //ToDo: add invalid input handler for user info
