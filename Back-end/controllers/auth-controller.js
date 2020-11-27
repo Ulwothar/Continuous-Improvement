@@ -1,16 +1,16 @@
 import { CheckToken, RefreshAccessToken } from './tokens-controller';
 import Cookies from 'cookies';
-//Not working yet, need to find a way to work this out
+//Using cookies to authorise user
 export const AuthoriseUser = async (req, res, next) => {
-  let accessToken = req.headers['accessToken'];
-  const refreshToken = req.headers['refreshToken'];
-  const login = req.headers['user'];
+  let cookies = new Cookies(req, res);
+  let accessToken = cookies.get('accessToken');
+  const refreshToken = cookies.get('refreshToken');
+  const login = cookies.get('user');
   const user = { login: login };
   let accessTokenValid = await CheckToken(accessToken);
   console.log(accessTokenValid);
   if (accessTokenValid === false) {
     let newAccessToken = await RefreshAccessToken(refreshToken, user);
-    console.log({ newAccessToken: newAccessToken });
     if (newAccessToken != null) {
       accessToken = newAccessToken;
     } else {
@@ -20,7 +20,7 @@ export const AuthoriseUser = async (req, res, next) => {
       });
     }
   }
-  let cookies = new Cookies(req, res);
+
   cookies.set('accessToken', accessToken);
   next();
 };

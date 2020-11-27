@@ -47,7 +47,6 @@ export const userLogin = async (req, res, next) => {
       new HttpError('Invalid inputs passed, please check your data.', 422),
     );
   }
-  //const jwt = new JsonWebToken();
 
   const password = req.body.password;
   const login = req.body.login;
@@ -62,19 +61,20 @@ export const userLogin = async (req, res, next) => {
     }
 
     if (await bcrypt.compare(password, checkUser.password)) {
-      // const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-      //   expiresIn: '15m',
-      // });
-      // const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
       const tokens = await CreateTokens(user);
+      //Setting auth cookies
       const cookies = new Cookies(req, res);
       cookies.set('accessToken', tokens.accessToken);
       cookies.set('refreshToken', tokens.refreshToken);
       cookies.set('user', checkUser.login, { httpOnly: false });
+      console.log({
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
+        user: checkUser.login,
+      });
       res.send({
         message: 'Logging successful!',
       });
-      //res.send({ message: `Welcome ${checkUser.login}` });
     } else {
       res.send({ message: 'Invalid password.' });
     }
