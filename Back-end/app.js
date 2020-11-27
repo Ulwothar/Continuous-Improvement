@@ -20,8 +20,8 @@ const connectionSettings = {
 };
 
 app.use((req, res, next) => {
-  //res.setHeader('Access-Control-Allow-Origin', `${process.env.FE_URI}`);  //Can't use this with credentials: 'include' on my front end
-  res.setHeader('Access-Control-Allow-Origin', `http://localhost:3000`); //but will leave it here for now just in case I need to add this later on
+  //res.setHeader('Access-Control-Allow-Origin', `${process.env.FE_URI}`);
+  res.setHeader('Access-Control-Allow-Origin', `http://localhost:3000`);
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization',

@@ -1,5 +1,6 @@
 import { CheckToken, RefreshAccessToken } from './tokens-controller';
 import Cookies from 'cookies';
+//Using cookies to authorise user
 export const AuthoriseUser = async (req, res, next) => {
   let cookies = new Cookies(req, res);
   let accessToken = cookies.get('accessToken');

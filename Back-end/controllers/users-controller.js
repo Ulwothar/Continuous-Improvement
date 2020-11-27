@@ -62,6 +62,7 @@ export const userLogin = async (req, res, next) => {
 
     if (await bcrypt.compare(password, checkUser.password)) {
       const tokens = await CreateTokens(user);
+      //Setting auth cookies
       const cookies = new Cookies(req, res);
       cookies.set('accessToken', tokens.accessToken);
       cookies.set('refreshToken', tokens.refreshToken);
