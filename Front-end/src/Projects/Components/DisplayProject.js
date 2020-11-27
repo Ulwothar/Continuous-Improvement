@@ -53,15 +53,12 @@ const DisplayProject = (props) => {
         headers: {
           'content-type': 'applicaton/json',
         },
+        credentials: 'include',
       });
     } catch (error) {
       console.log(error);
     }
   };
-
-  // useEffect(() => {
-  //   console.log(comments);
-  // }, [comments]);
 
   useEffect(() => {
     //Updating project status when Select input is changed
