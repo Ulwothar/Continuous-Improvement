@@ -15,11 +15,13 @@ import FinishedProjects from './Projects/Pages/FinishedProjects';
 import ReviewSuggestion from './Projects/Pages/ReviewSuggestion';
 import Authenticate from './Users/Pages/Authenticate';
 import { AuthContext } from './shared/context/AuthContext';
+import CookieCheck from './shared/context/CookieCheck';
 import './App.css';
 
 function App() {
   dotenv.config();
-  const [isLogged, setIsLogged] = useState(false);
+  const cookieCheck = CookieCheck;
+  const [isLogged, setIsLogged] = useState(cookieCheck);
 
   const login = useCallback(() => {
     setIsLogged(true);

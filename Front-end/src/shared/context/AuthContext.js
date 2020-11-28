@@ -1,7 +1,8 @@
 import { createContext } from 'react';
+import CookieCheck from './CookieCheck';
 
 export const AuthContext = createContext({
-  isLogged: false,
+  isLogged: CookieCheck,
   login: () => {},
   logout: () => {},
 });
