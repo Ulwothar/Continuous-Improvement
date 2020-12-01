@@ -65,13 +65,13 @@ const DisplayProject = (props) => {
     if (value.value) {
       const id = props.id;
       const status = value.value;
-      //changeStatus({ id: id, status: status });
       try {
         fetch(`http://localhost:5000/api/projects/status/${id}`, {
           method: 'PATCH',
           headers: {
             'content-type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify({
             status: status,
           }),
@@ -165,8 +165,8 @@ const DisplayProject = (props) => {
         {/* <ViewComments id={id} key={id} /> */}
         {reviewerComments.length > 0 ? (
           reviewerComments.map((revComment) => (
-            <span>
-              <p className="reviewer-description-text" key={revComment._id}>
+            <span key={revComment._id}>
+              <p className="reviewer-description-text">
                 {revComment.comment}
 
                 <button

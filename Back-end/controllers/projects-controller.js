@@ -11,21 +11,25 @@ export const getProjectById = async (req, res, next) => {
   try {
     project = await Project.findById(projectId);
   } catch (err) {
-    const error = new HttpError(
-      'Something went wrong, could not find a project',
-      500,
-    );
-    console.log(err);
-    return next(error);
+    console.log('Invalid project id.');
+    return res.status(404).json({
+      message: 'Could not find a project with the provided id.',
+    });
+    // const error = new HttpError(
+    //   'Something went wrong, could not find a project',
+    //   404,
+    // );
+    // console.log(project);
+    // return next(err);
   }
 
-  if (!project) {
-    const error = new HttpError(
-      'Could not find a project with the provided ID',
-      404,
-    );
-    return next(error);
-  }
+  //   if (!project) {
+  //     const error = new HttpError(
+  //       'Could not find a project with the provided ID',
+  //       404,
+  //     );
+  //     return next(error);
+  //   }
 
   res.json({
     project: project.toObject({ getters: true }),
