@@ -3,7 +3,7 @@ import Select from 'react-select';
 
 import { addComments, deleteComment } from './Comments';
 import { statusSelect } from '../../shared/UIComponents/form-select';
-import { changeStatus } from './SavedProjects';
+//import { changeStatus } from './SavedProjects';
 import './DisplayProject.css';
 
 const DisplayProject = (props) => {

@@ -15,13 +15,11 @@ import FinishedProjects from './Projects/Pages/FinishedProjects';
 import ReviewSuggestion from './Projects/Pages/ReviewSuggestion';
 import Authenticate from './Users/Pages/Authenticate';
 import { AuthContext } from './shared/context/AuthContext';
-import CookieCheck from './shared/context/CookieCheck';
 import './App.css';
 
 function App() {
   dotenv.config();
-  const cookieCheck = CookieCheck;
-  const [isLogged, setIsLogged] = useState(cookieCheck);
+  const [isLogged, setIsLogged] = useState(false);
 
   const login = useCallback(() => {
     setIsLogged(true);
@@ -65,7 +63,7 @@ function App() {
         <Route path="/projects/:pid" exact>
           <ReviewSuggestion />
         </Route>
-        <Redirect to="/" />
+        <Redirect to="/new" />
       </Switch>
     );
   }

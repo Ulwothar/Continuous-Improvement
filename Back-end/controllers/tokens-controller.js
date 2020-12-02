@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 import Token from '../models/token';
-import HttpError from '../models/http-error';
+import Cookies from 'cookies';
+//import HttpError from '../models/http-error';
 
 function genereateToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
@@ -30,8 +31,7 @@ export const RefreshAccessToken = async (token, user) => {
 
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) {
-        console.log('Something went wrong, could not verify your tokens!');
-        return err;
+        return null;
       }
     });
     const accessToken = genereateToken(user);

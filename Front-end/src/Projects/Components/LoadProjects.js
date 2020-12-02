@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../shared/context/AuthContext';
 
 import Preview from './Preview';
 //import DisplayProject from './DisplayProject';
@@ -8,8 +9,10 @@ import './LoadProjects.css';
 const LoadProjects = (props) => {
   const [projects, setProjects] = useState([]);
   const status = props.status;
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
+    let isMounted = true;
     fetch(`http://localhost:5000/api/projects/status/${status}`, {
       method: 'GET',
       credentials: 'include',
@@ -18,9 +21,18 @@ const LoadProjects = (props) => {
         return res.json();
       })
       .then((result) => {
-        setProjects(result.projects);
+        if (isMounted && result.message) {
+          alert(result.message);
+          auth.logout();
+          window.location.reload();
+        } else if (isMounted) {
+          setProjects(result.projects);
+        }
+        return () => {
+          isMounted = false;
+        };
       });
-  }, [status]);
+  }, [status, auth]);
 
   //console.log(document.cookie);
   return projects.map((project) => (

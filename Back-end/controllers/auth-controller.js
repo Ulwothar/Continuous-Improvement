@@ -11,12 +11,15 @@ export const AuthoriseUser = async (req, res, next) => {
   console.log(accessTokenValid);
   if (accessTokenValid === false) {
     let newAccessToken = await RefreshAccessToken(refreshToken, user);
+    console.log(newAccessToken);
     if (newAccessToken != null) {
       accessToken = newAccessToken;
     } else {
-      return res.json({
-        message:
-          'Something went wrong and we could not authenticate you. If this problem persists, please contact server administrator.',
+      cookies.set('user');
+      cookies.set('accessToken');
+      cookies.set('refreshToken');
+      return res.status(401).json({
+        message: 'Invalid tokens, please try logging in again.',
       });
     }
   }
