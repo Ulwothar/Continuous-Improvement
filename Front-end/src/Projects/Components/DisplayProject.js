@@ -10,6 +10,7 @@ const DisplayProject = (props) => {
   const [value, setValue] = useState(props.status); //State used to change status of project - NEED TO ADD OPTION TO DELETE PROJECT HERE!!!
   const [comments, setComments] = useState(''); //State used to change textarea with comments
   const [reviewerComments, setReviewerComments] = useState([]);
+  const [reloadComments, setReloadComments] = useState(reviewerComments.length);
   const id = props.id;
 
   const StatusChange = (statusValue) => {
@@ -20,16 +21,17 @@ const DisplayProject = (props) => {
     setComments(event.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     //let commentId = Math.floor(Math.random() * 1000000).toString();
     const newComment = {
       projectId: `${props.id}`,
       comment: `${comments}`,
     };
+    event.target.reset();
     addComments(newComment);
     try {
-      fetch(`http://localhost:5000/api/comments/${id}`, {
+      await fetch(`http://localhost:5000/api/comments/${id}`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -43,12 +45,12 @@ const DisplayProject = (props) => {
     } catch (error) {
       console.log(error);
     }
-    event.target.reset();
+    setReloadComments(reloadComments + 1);
   };
 
-  const deleteProjectHandler = () => {
+  const deleteProjectHandler = async () => {
     try {
-      fetch(`http://localhost:5000/api/projects/${id}`, {
+      await fetch(`http://localhost:5000/api/projects/${id}`, {
         method: 'DELETE',
         headers: {
           'content-type': 'applicaton/json',
@@ -60,49 +62,58 @@ const DisplayProject = (props) => {
     }
   };
 
+  async function fetchChangeStatus(status, id) {
+    try {
+      await fetch(`http://localhost:5000/api/projects/status/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          status: status,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     //Updating project status when Select input is changed
     if (value.value) {
       const id = props.id;
       const status = value.value;
-      try {
-        fetch(`http://localhost:5000/api/projects/status/${id}`, {
-          method: 'PATCH',
-          headers: {
-            'content-type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({
-            status: status,
-          }),
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      fetchChangeStatus(status, id);
+
       console.log(status);
     }
   }, [value.value, props.id]);
 
-  useEffect(() => {
+  async function fetchComments(id) {
     try {
-      fetch(`http://localhost:5000/api/comments/${id}`, {
+      await fetch(`http://localhost:5000/api/comments/${id}`, {
         credentials: 'include',
       })
         .then((res) => res.json())
         .then((result) => {
           if (result.comments) {
             setReviewerComments(result.comments);
-            console.log(result.comments);
+            //console.log(result.comments);
           } else {
             setReviewerComments(result);
-            console.log(result);
+            //console.log(result);
           }
         });
     } catch (error) {
       console.log(error);
     }
-    console.log(reviewerComments);
-  }, [id]);
+  }
+
+  useEffect(() => {
+    fetchComments(id);
+    //console.log(reviewerComments);
+  }, [id, reloadComments]);
 
   const statusOptions = statusSelect();
   return (
@@ -171,8 +182,8 @@ const DisplayProject = (props) => {
 
                 <button
                   className="delete-comment-button"
-                  onClick={() =>
-                    fetch(
+                  onClick={async () => {
+                    await fetch(
                       `http://localhost:5000/api/comments/${revComment._id}`,
                       {
                         method: 'DELETE',
@@ -181,8 +192,9 @@ const DisplayProject = (props) => {
                         },
                         credentials: 'include',
                       },
-                    )
-                  }>
+                    );
+                    setReloadComments(reloadComments - 1);
+                  }}>
                   DELETE
                 </button>
               </p>
