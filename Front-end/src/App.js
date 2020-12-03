@@ -16,10 +16,11 @@ import ReviewSuggestion from './Projects/Pages/ReviewSuggestion';
 import Authenticate from './Users/Pages/Authenticate';
 import { AuthContext } from './shared/context/AuthContext';
 import './App.css';
+import CookieCheck from './shared/context/CookieCheck';
 
 function App() {
   dotenv.config();
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(CookieCheck);
 
   const login = useCallback(() => {
     setIsLogged(true);
