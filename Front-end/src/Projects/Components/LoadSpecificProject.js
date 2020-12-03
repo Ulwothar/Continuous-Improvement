@@ -10,11 +10,11 @@ const LoadSpecificProject = (props) => {
       credentials: 'include',
     })
       .then((res) => {
-        console.log(res.status);
+        // console.log(res.status);
         return res.json();
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (!result.project) {
           setSpecificProject(result);
         } else {
