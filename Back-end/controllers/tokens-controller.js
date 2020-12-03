@@ -41,9 +41,11 @@ export const RefreshAccessToken = async (token, user) => {
   }
 };
 
-export const DeleteToken = async (token, user) => {
+export const DeleteToken = async (refreshToken, user) => {
   try {
-    Token.findOneAndDelete({ refreshToken: token, name: user });
+    const name = user;
+    //const token = new Token({ name, refreshToken });
+    await Token.findOneAndDelete({ refreshToken });
     return null;
   } catch (err) {
     return err;
@@ -52,25 +54,30 @@ export const DeleteToken = async (token, user) => {
 
 export const CreateTokens = async (user) => {
   const accessToken = genereateToken(user);
+  const name = user.login;
   const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-  const token = new Token({ name: user.login, refreshToken });
-  const checkToken = Token.find({ name: user.login });
-  if (!checkToken) {
-    try {
-      await token.save();
-    } catch (err) {
-      console.log(err);
+  const token = new Token({ name, refreshToken });
+  try {
+    const checkToken = await Token.findOne({ name: name });
+    if (!checkToken) {
+      try {
+        await token.save();
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await Token.findOneAndUpdate(
+          { name },
+          { refreshToken },
+          { new: true, useFindAndModify: false },
+        );
+      } catch (err) {
+        console.log(err);
+      }
     }
-  } else {
-    try {
-      await Token.findOneAndUpdate(
-        { name: user.login },
-        { refreshToken: refreshToken },
-        { new: true, useFindAndModify: false },
-      );
-    } catch (err) {
-      console.log(err);
-    }
+  } catch (error) {
+    console.log(error);
   }
 
   const tokens = { accessToken: accessToken, refreshToken: refreshToken };

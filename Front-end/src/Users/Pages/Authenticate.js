@@ -3,10 +3,10 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../shared/context/AuthContext';
 import './Authenticate.css';
 
-const DUMMY_USER = {
-  name: 'Mateusz',
-  password: 'qwerty',
-};
+// const DUMMY_USER = {
+//   name: 'Mateusz',
+//   password: 'qwerty',
+// };
 
 let userDetails = {
   userName: '',
@@ -30,7 +30,7 @@ const Authenticate = () => {
   const logInSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      const login = await fetch('http://localhost:5000/api/users/login', {
+      await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
         headers: {
           'content-Type': 'application/json',
@@ -45,11 +45,8 @@ const Authenticate = () => {
       console.log(error);
     }
 
-    if (
-      userDetails.userName === DUMMY_USER.name &&
-      userDetails.password === DUMMY_USER.password
-    ) {
-      console.log(document.cookie);
+    if (document.cookie) {
+      //console.log(document.cookie);     //Checking if no httpOnly cookie was
       auth.login();
     } else {
       console.log('Wrong username or password'); //ToDo: add invalid input handler for user info

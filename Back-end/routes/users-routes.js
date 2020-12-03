@@ -1,6 +1,10 @@
 import express from 'express';
 import { check } from 'express-validator';
-import { userLogin, userRegister } from '../controllers/users-controller';
+import {
+  userLogin,
+  userLogout,
+  userRegister,
+} from '../controllers/users-controller';
 
 const router = express.Router();
 
@@ -18,6 +22,6 @@ router.post(
   userLogin,
 );
 
-router.delete('/logout');
+router.delete('/logout', userLogout);
 
 export default router;

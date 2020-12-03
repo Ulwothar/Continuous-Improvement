@@ -4,7 +4,7 @@ const CookieCheck = () => {
     cookieCheck = false;
   } else cookieCheck = true;
 
-  console.log(cookieCheck);
+  //console.log(cookieCheck);
   return cookieCheck;
 };
 

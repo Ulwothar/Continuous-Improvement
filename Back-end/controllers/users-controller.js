@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { validationResult } from 'express-validator';
 import HttpError from '../models/http-error';
 import User from '../models/user';
-import { CreateTokens } from './tokens-controller';
+import { CreateTokens, DeleteToken } from './tokens-controller';
 import Cookies from 'cookies';
 
 export const userRegister = async (req, res, next) => {
@@ -67,11 +67,11 @@ export const userLogin = async (req, res, next) => {
       cookies.set('accessToken', tokens.accessToken);
       cookies.set('refreshToken', tokens.refreshToken);
       cookies.set('user', checkUser.login, { httpOnly: false });
-      console.log({
-        accessToken: tokens.accessToken,
-        refreshToken: tokens.refreshToken,
-        user: checkUser.login,
-      });
+      // console.log({
+      //   accessToken: tokens.accessToken,
+      //   refreshToken: tokens.refreshToken,
+      //   user: checkUser.login,
+      // });
       res.send({
         message: 'Logging successful!',
       });
@@ -81,4 +81,15 @@ export const userLogin = async (req, res, next) => {
   } catch (err) {
     const error = new HttpError('Something went wrong, please try again.', 500);
   }
+};
+
+export const userLogout = async (req, res, next) => {
+  let cookies = new Cookies(req, res);
+  const refreshToken = cookies.get('refreshToken');
+  const name = cookies.get('user');
+  const tokenDelete = await DeleteToken(refreshToken, name);
+  cookies.set('user');
+  cookies.set('accessToken');
+  cookies.set('refreshToken');
+  res.status(200).json({ message: 'Loggin out successful' });
 };

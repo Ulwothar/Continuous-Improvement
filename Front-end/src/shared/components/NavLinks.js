@@ -1,15 +1,27 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../shared/context/AuthContext';
+import UserLogout from '../../Users/Components/UserLogout';
 
 import './NavLinks.css';
 
 const NavLinks = () => {
   const auth = useContext(AuthContext);
+  const Logout = () => UserLogout();
+  // const LogOut = async ( ) => {
+  //   logout();
+  // };
 
-  const logOut = () => {
+  const LogOut = () => {
+    Logout();
     auth.logout();
   };
+
+  // const LogOut = () => {
+  //   console.log('before calling UserLogout');
+  //   UserLogout;
+  //   console.log('after calling LogOut');
+  // };
   return (
     <span className="nav-links">
       {auth.isLogged && (
@@ -21,7 +33,7 @@ const NavLinks = () => {
       )}
       {auth.isLogged && (
         <li>
-          <button onClick={logOut} className="log-button">
+          <button onClick={LogOut} className="log-button">
             LOG OUT
           </button>
         </li>
