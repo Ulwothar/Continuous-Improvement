@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { useHistory } from 'react-router-dom';
 
 import {
   departmentSelect,
@@ -28,6 +29,7 @@ const NewSuggestion = () => {
   const department = departmentSelect();
   const shift = shiftSelect();
   const waste = wasteSelect();
+  const history = useHistory();
 
   let thisName = '';
 
@@ -50,8 +52,11 @@ const NewSuggestion = () => {
     NewForm.date = Date().toString().slice(0, 24);
     PlaceNewSuggestion(NewForm);
     event.target.reset();
-    //console.log(NewForm);
     alert('Thank you for your suggestion!');
+    window.location.reload();
+
+    return false;
+    //console.log(NewForm);
   };
 
   // useEffect(() => {

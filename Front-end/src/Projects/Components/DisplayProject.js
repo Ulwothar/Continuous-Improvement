@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { useHistory } from 'react-router-dom';
 
 import { addComments, deleteComment } from './Comments';
 import { statusSelect } from '../../shared/UIComponents/form-select';
@@ -12,6 +13,7 @@ const DisplayProject = (props) => {
   const [reviewerComments, setReviewerComments] = useState([]);
   const [reloadComments, setReloadComments] = useState(reviewerComments.length);
   const id = props.id;
+  const history = useHistory();
 
   const StatusChange = (statusValue) => {
     setValue(statusValue);
@@ -56,6 +58,8 @@ const DisplayProject = (props) => {
           'content-type': 'applicaton/json',
         },
         credentials: 'include',
+      }).then(() => {
+        history.push(`/${value}`);
       });
     } catch (error) {
       console.log(error);
