@@ -53,3 +53,34 @@ export const addTask = async (req, res, next) => {
 
   res.status(201).json(createdTask);
 };
+
+export const deleteTask = async (req, res, next) => {
+  const id = req.params.tid;
+  let task;
+  try {
+    task = await Task.findOne({ _id: id });
+    console.log(task);
+  } catch (error) {
+    console.log(error);
+    res.status(410).json({
+      message: 'This task does not exist. Check your data and try again.',
+    });
+  }
+
+  if (!task) {
+    return res.status(410).json({
+      message: 'This task does not exist. Check your data and try again.',
+    });
+  }
+
+  try {
+    await Task.deleteOne({ _id: id });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message:
+        'Internal server error, please try again. If the problem persist, please contact your admin.',
+    });
+  }
+  res.status(200).json({ message: 'Task deleted successfully' });
+};

@@ -2,7 +2,11 @@ import express from 'express';
 import { check } from 'express-validator';
 import { AuthoriseUser } from '../controllers/auth-controller';
 
-import { addTask, showTasks } from '../controllers/tasks-controller';
+import {
+  addTask,
+  deleteTask,
+  showTasks,
+} from '../controllers/tasks-controller';
 
 const router = express.Router();
 
@@ -16,5 +20,7 @@ router.post(
   AuthoriseUser,
   addTask,
 );
+
+router.delete('/:tid', AuthoriseUser, deleteTask);
 
 export default router;
