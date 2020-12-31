@@ -90,6 +90,10 @@ export const updateTitle = async (req, res, next) => {
 
   const title = req.body;
 
+  if (!title.title) {
+    return res.status(500).json({ message: 'No title provided!' });
+  }
+
   try {
     await Task.findByIdAndUpdate(id, title, { useFindAndModify: false });
   } catch (error) {
@@ -106,6 +110,12 @@ export const updateDescription = async (req, res, next) => {
   const id = req.params.tid;
 
   const description = req.body;
+
+  console.log(description);
+
+  if (!description.description) {
+    return res.status(500).json({ message: 'No description provided!' });
+  }
 
   try {
     await Task.findByIdAndUpdate(id, description, { useFindAndModify: false });
