@@ -6,6 +6,8 @@ import {
   addTask,
   deleteTask,
   showTasks,
+  updateDescription,
+  updateTitle,
 } from '../controllers/tasks-controller';
 
 const router = express.Router();
@@ -22,5 +24,9 @@ router.post(
 );
 
 router.delete('/:tid', AuthoriseUser, deleteTask);
+
+router.patch('/title/:tid', AuthoriseUser, updateTitle);
+
+router.patch('/description/:tid', AuthoriseUser, updateDescription);
 
 export default router;

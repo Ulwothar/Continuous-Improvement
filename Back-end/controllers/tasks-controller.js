@@ -84,3 +84,37 @@ export const deleteTask = async (req, res, next) => {
   }
   res.status(200).json({ message: 'Task deleted successfully' });
 };
+
+export const updateTitle = async (req, res, next) => {
+  const id = req.params.tid;
+
+  const title = req.body;
+
+  try {
+    await Task.findByIdAndUpdate(id, title, { useFindAndModify: false });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: 'Could not modify this task, please try again.' });
+  }
+
+  res.status(201).json({ message: 'Title updated.' });
+};
+
+export const updateDescription = async (req, res, next) => {
+  const id = req.params.tid;
+
+  const description = req.body;
+
+  try {
+    await Task.findByIdAndUpdate(id, description, { useFindAndModify: false });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: 'Could not modify this task, please try again.' });
+  }
+
+  res.status(201).json({ message: 'Description updated.' });
+};
