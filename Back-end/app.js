@@ -7,6 +7,7 @@ import projectsRoutes from './routes/projects-routes';
 import usersRoutes from './routes/users-routes';
 import commentsRoutes from './routes/comments-routes';
 import tasksRoutes from './routes/tasks-routes';
+import activityRoutes from './routes/activity-routes';
 import HttpError from './models/http-error';
 import { error } from 'console';
 
@@ -45,6 +46,8 @@ app.use('/api/users', usersRoutes); //user login
 app.use('/api/comments', commentsRoutes); //reviewer comments
 
 app.use('/api/tasks', tasksRoutes); //tasks assigned to projects
+
+app.use('/api/activities', activityRoutes); //activities assigned to tasks
 
 app.use((req, res, next) => {
   throw new HttpError('Could not find this route', 404);

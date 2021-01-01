@@ -56,31 +56,20 @@ export const addTask = async (req, res, next) => {
 
 export const deleteTask = async (req, res, next) => {
   const id = req.params.tid;
-  let task;
-  try {
-    task = await Task.findOne({ _id: id });
-    console.log(task);
-  } catch (error) {
-    console.log(error);
-    res.status(410).json({
-      message: 'This task does not exist. Check your data and try again.',
-    });
-  }
-
-  if (!task) {
-    return res.status(410).json({
-      message: 'This task does not exist. Check your data and try again.',
-    });
-  }
+  let deletedTask;
 
   try {
-    await Task.deleteOne({ _id: id });
+    deletedTask = await Task.deleteOne({ _id: id });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       message:
         'Internal server error, please try again. If the problem persist, please contact your admin.',
     });
+  }
+
+  if (!deletedTask.n) {
+    return res.status(410).json({ message: 'Error, task already deleted!' });
   }
   res.status(200).json({ message: 'Task deleted successfully' });
 };
@@ -91,7 +80,7 @@ export const updateTitle = async (req, res, next) => {
   const title = req.body;
 
   if (!title.title) {
-    return res.status(500).json({ message: 'No title provided!' });
+    return res.status(400).json({ message: 'No title provided!' });
   }
 
   try {
@@ -114,7 +103,7 @@ export const updateDescription = async (req, res, next) => {
   console.log(description);
 
   if (!description.description) {
-    return res.status(500).json({ message: 'No description provided!' });
+    return res.status(400).json({ message: 'No description provided!' });
   }
 
   try {
