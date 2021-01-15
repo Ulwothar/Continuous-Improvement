@@ -1,0 +1,25 @@
+.loading-div{
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.all-projects-container{
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+}
+
+.new-projects-container{
+    grid-column-start: 1;
+}
+
+.ongoing-projects-container{
+    grid-column-start: 2;
+}
+
+.finished-projects-container{
+    grid-column-start: 3;
+}

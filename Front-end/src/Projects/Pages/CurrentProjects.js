@@ -9,7 +9,7 @@ const CURRENT = {
   title: 'Currently proccessing projects:',
 };
 
-const FinishedProjects = () => {
+const CurrentProjects = () => {
   return (
     <LoadProjects
       status={CURRENT.status}
@@ -19,4 +19,4 @@ const FinishedProjects = () => {
   );
 };
 
-export default FinishedProjects;
+export default CurrentProjects;

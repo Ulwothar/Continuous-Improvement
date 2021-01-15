@@ -13,6 +13,7 @@ import RecentSuggestion from './Projects/Pages/RecentSuggestions';
 import CurrentProjects from './Projects/Pages/CurrentProjects';
 import FinishedProjects from './Projects/Pages/FinishedProjects';
 import ReviewSuggestion from './Projects/Pages/ReviewSuggestion';
+import AllProjects from './Projects/Pages/AllProjects';
 import Authenticate from './Users/Pages/Authenticate';
 import { AuthContext } from './shared/context/AuthContext';
 import './App.css';
@@ -59,7 +60,9 @@ function App() {
         <Route path="/finished" exact>
           <FinishedProjects />
         </Route>
-        <Route path="/states" exact></Route>
+        <Route path="/states" exact>
+          <AllProjects />
+        </Route>
         <Route path="/states/:pid" exact></Route>
         <Route path="/projects/:pid" exact>
           <ReviewSuggestion />
