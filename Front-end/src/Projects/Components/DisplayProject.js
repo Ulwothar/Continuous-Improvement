@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useHistory } from 'react-router-dom';
 
-import { addComments, deleteComment } from './Comments';
+//import { addComments } from './Comments';
 import { statusSelect } from '../../shared/UIComponents/form-select';
 //import { changeStatus } from './SavedProjects';
 import './DisplayProject.css';
@@ -26,12 +26,12 @@ const DisplayProject = (props) => {
   const submitHandler = async (event) => {
     event.preventDefault();
     //let commentId = Math.floor(Math.random() * 1000000).toString();
-    const newComment = {
-      projectId: `${props.id}`,
-      comment: `${comments}`,
-    };
+    // const newComment = {
+    //   projectId: `${props.id}`,
+    //   comment: `${comments}`,
+    // };
     event.target.reset();
-    addComments(newComment);
+    //addComments(newComment);
     try {
       await fetch(`http://localhost:5000/api/comments/${id}`, {
         method: 'POST',
