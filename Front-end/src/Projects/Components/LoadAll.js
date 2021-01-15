@@ -96,25 +96,28 @@ const LoadAll = (props) => {
     <div className="all-projects-container">
       <div className="new-projects-container">
         <h2>New Suggestions</h2>
+        <hr />
         {newProjects.map(({ id, title }) => (
-          <div className="preview-window">
-            <h3 key={id}>{title}</h3>
+          <div className="title-window" key={id}>
+            <h3>{title}</h3>
           </div>
         ))}
       </div>
       <div className="ongoing-projects-container">
         <h2>Ongoing Projects</h2>
+        <hr />
         {ongoingProjects.map(({ id, title }) => (
-          <div className="preview-window">
-            <h3 key={id}>{title}</h3>
+          <div className="title-window" key={id}>
+            <h3>{title}</h3>
           </div>
         ))}
       </div>
       <div className="finished-projects-container">
         <h2>Finished Projects</h2>
+        <hr />
         {finishedProjects.map(({ id, title }) => (
-          <div className="preview-window">
-            <h3 key={id}>{title}</h3>
+          <div className="title-window" key={id}>
+            <h3>{title}</h3>
           </div>
         ))}
       </div>

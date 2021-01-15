@@ -9,17 +9,53 @@
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1em;
     text-align: center;
 }
 
 .new-projects-container{
     grid-column-start: 1;
+    background-color: rgb(245, 243, 212);
+    border-radius: 5%;
+    margin-top: 10px;
 }
 
 .ongoing-projects-container{
     grid-column-start: 2;
+    background-color:rgb(245, 243, 212);
+    border-radius: 5%;
+    margin-top: 10px;
 }
 
 .finished-projects-container{
     grid-column-start: 3;
+    background-color: rgb(245, 243, 212);
+    border-radius: 5%;
+    margin-top: 10px;
+}
+
+.title-window {
+    margin: 40px auto;
+    max-width: 1200px;
+    width: 90%;
+    background-color: rgb(230, 222, 177);
+    /* border: 2px dashed rgba(0, 153, 255, 0.808); */
+    border-radius: 20px;
+  }
+
+  .title-window:hover {
+    background: rgb(231, 211, 97);
+  }
+
+h2 {
+    font-size: 2em;
+    color: rgb(37, 50, 228);
+}
+
+hr {
+    max-width: 75%;
+    text-decoration: none;
+    background: rgb(241, 55, 55);
+    border: none;
+    height: 2px;
 }
