@@ -27,3 +27,24 @@
     border-radius: 5%;
     margin-top: 10px;
 }
+
+.add-task {
+    display: block;
+    width: 75%;
+    text-align: left;
+    margin: 0 1em 0 3em;
+    background-color: rgb(240, 225, 158);
+    border-radius: 5px;
+}
+
+.add-task:hover {
+    background-color: rgb(240, 216, 108);
+}
+
+h4{
+    font-size: 1.6em;
+    color: rgb(23, 67, 212);
+}
+h4:hover{
+    color: rgb(31, 159, 233);
+}
