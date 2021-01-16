@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../shared/context/AuthContext';
 import './LoadAll.css';
 
@@ -81,9 +82,9 @@ const LoadAll = (props) => {
   }, [auth]);
 
   if (
-    !newProjects.length ||
-    !ongoingProjects.length ||
-    !finishedProjects.length
+    newProjects.length === undefined ||
+    ongoingProjects.length === undefined ||
+    finishedProjects.length === undefined
   ) {
     return (
       <div className="loading-div">
@@ -99,7 +100,9 @@ const LoadAll = (props) => {
         <hr />
         {newProjects.map(({ id, title }) => (
           <div className="title-window" key={id}>
-            <h3>{title}</h3>
+            <NavLink to={`/states/${id}`} className="states-links">
+              <h3>{title}</h3>
+            </NavLink>
           </div>
         ))}
       </div>
@@ -108,7 +111,9 @@ const LoadAll = (props) => {
         <hr />
         {ongoingProjects.map(({ id, title }) => (
           <div className="title-window" key={id}>
-            <h3>{title}</h3>
+            <NavLink to={`/states/${id}`} className="states-links">
+              <h3>{title}</h3>
+            </NavLink>
           </div>
         ))}
       </div>
@@ -117,7 +122,9 @@ const LoadAll = (props) => {
         <hr />
         {finishedProjects.map(({ id, title }) => (
           <div className="title-window" key={id}>
-            <h3>{title}</h3>
+            <NavLink to={`/states/${id}`} className="states-links">
+              <h3>{title}</h3>
+            </NavLink>
           </div>
         ))}
       </div>
