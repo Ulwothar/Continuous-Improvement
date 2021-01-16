@@ -1,0 +1,29 @@
+.tasks-container{
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1em;
+    text-align: center;
+}
+
+.task-status-todo{
+    grid-column-start: 1;
+    background-color: rgb(245, 243, 212);
+    border-radius: 5%;
+    margin-top: 10px;
+}
+
+.task-status-ongoing{
+    grid-column-start: 2;
+    background-color:rgb(245, 243, 212);
+    border-radius: 5%;
+    margin-top: 10px;
+}
+
+.task-status-done{
+    grid-column-start: 3;
+    background-color: rgb(245, 243, 212);
+    border-radius: 5%;
+    margin-top: 10px;
+}

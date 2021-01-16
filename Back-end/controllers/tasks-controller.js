@@ -15,7 +15,7 @@ export const showTasks = async (req, res, next) => {
   }
 
   if (tasks.length === 0) {
-    res.json('There are no tasks for this project.');
+    res.json({ message: 'There are no tasks for this project.' });
   } else {
     res.json({
       tasks: tasks.map((task) => task.toObject({ getters: true })),
@@ -35,13 +35,14 @@ export const addTask = async (req, res, next) => {
   }
 
   const projectId = req.params.pid;
-  const { title, description, date } = req.body;
+  const { title, description, date, status } = req.body;
 
   const createdTask = new Task({
     projectId,
     title,
     description,
     date,
+    status,
   });
 
   try {
@@ -116,4 +117,25 @@ export const updateDescription = async (req, res, next) => {
   }
 
   res.status(201).json({ message: 'Description updated.' });
+};
+
+export const updateStatus = async (req, res, next) => {
+  const id = req.params.tid;
+
+  const status = req.body;
+
+  if (!status.status) {
+    return res.status(400).json({ message: 'No status provided!' });
+  }
+
+  try {
+    await Task.findByIdAndUpdate(id, status, { useFindAndModify: false });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: 'Could not modify this task, please try again.' });
+  }
+
+  res.status(201).json({ message: 'Status updated.' });
 };

@@ -7,6 +7,7 @@ import {
   deleteTask,
   showTasks,
   updateDescription,
+  updateStatus,
   updateTitle,
 } from '../controllers/tasks-controller';
 
@@ -19,6 +20,7 @@ router.post(
   check('title').notEmpty(),
   check('description').notEmpty(),
   check('date').notEmpty(),
+  check('status').notEmpty(),
   AuthoriseUser,
   addTask,
 );
@@ -28,5 +30,7 @@ router.delete('/:tid', AuthoriseUser, deleteTask);
 router.patch('/title/:tid', AuthoriseUser, updateTitle);
 
 router.patch('/description/:tid', AuthoriseUser, updateDescription);
+
+router.patch('/status/:tid', AuthoriseUser, updateStatus);
 
 export default router;

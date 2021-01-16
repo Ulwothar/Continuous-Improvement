@@ -40,11 +40,15 @@
     width: 90%;
     background-color: rgb(230, 222, 177);
     /* border: 2px dashed rgba(0, 153, 255, 0.808); */
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
   .title-window:hover {
     background: rgb(231, 211, 97);
+  }
+  
+  .states-links {
+      text-decoration: none;
   }
 
 h2 {
