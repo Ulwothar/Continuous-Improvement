@@ -19,7 +19,6 @@ router.post(
   '/:pid',
   check('title').notEmpty(),
   check('description').notEmpty(),
-  check('date').notEmpty(),
   check('status').notEmpty(),
   AuthoriseUser,
   addTask,
