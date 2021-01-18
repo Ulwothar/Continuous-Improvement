@@ -39,6 +39,7 @@
 
 .add-task:hover {
     background-color: rgb(240, 216, 108);
+    cursor: pointer;
 }
 
 h4{
@@ -47,4 +48,58 @@ h4{
 }
 h4:hover{
     color: rgb(31, 159, 233);
+}
+
+.create-task-label{
+    grid-column-start: 1;
+    display: grid;
+    grid-template-columns: 1fr, 1fr;
+    margin-top: 1em;
+}
+.create-task-label p {
+    grid-column-start: 1;
+    margin-right: auto;
+}
+.create-task-label input {
+    grid-column-start: 2;
+    max-width: 250px;
+    width: 100%;
+    position: absolute;
+    right: 50%;
+    margin-top: 10px;
+    border: 1px solid rgb(211, 205, 205);
+  border-radius: 5px;
+  padding-left: 0.5em;
+}
+
+.create-task-description {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1em;
+}
+.create-task-description textarea {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border: 1px solid rgb(211, 205, 205);
+  border-radius: 5px;
+  width: 400px;
+  max-width: 100%;
+  height: 200px;
+  margin-left: 2em;
+  padding-left: 1em;
+  padding-top: 1em;
+}
+
+.create-task-container {
+    max-width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    column-gap: 1em;
+    text-align: left;
 }

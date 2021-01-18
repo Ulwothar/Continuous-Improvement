@@ -16,15 +16,6 @@ const DisplayTasks = (props) => {
     createNewDiv,
     document.getElementsByClassName(`task-status-${status}`)[0],
   );
-  //   document
-  //     .getElementsByClassName(`task-status-${status}`)[0]
-  //     .appendChild(createNewDiv);
-  // <div>
-  //   <h2>title</h2>
-  //   <p>status</p>
-  //   <p>date</p>
-  //   <p>description</p>
-  // </div>
 };
 
 export default DisplayTasks;
