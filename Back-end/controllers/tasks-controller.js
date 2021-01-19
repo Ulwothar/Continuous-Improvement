@@ -35,13 +35,14 @@ export const addTask = async (req, res, next) => {
   }
 
   const projectId = req.params.pid;
-  const { title, description, date, status } = req.body;
+  const { title, description, startDate, finishDate, status } = req.body;
 
   const createdTask = new Task({
     projectId,
     title,
     description,
-    date,
+    startDate,
+    finishDate,
     status,
   });
 
