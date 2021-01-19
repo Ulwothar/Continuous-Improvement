@@ -130,3 +130,7 @@ textarea {
   color: rgb(198, 207, 235);
   cursor: pointer;
 }
+
+.suggestion-description{
+  white-space: pre-line;
+}

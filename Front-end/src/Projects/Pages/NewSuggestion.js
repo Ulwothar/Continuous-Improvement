@@ -134,6 +134,7 @@ const NewSuggestion = () => {
             placeholder="Please describe the current situation here..."
             label="Current Situation:"
             className="current-situation-text"
+            wrap="true"
             required
           />
         </label>
@@ -146,6 +147,7 @@ const NewSuggestion = () => {
             placeholder="Please describe your improvement suggestion here..."
             label="Improvement Suggestion:"
             className="suggestion-text"
+            wrap="true"
             required
           />
         </label>
@@ -157,6 +159,7 @@ const NewSuggestion = () => {
             className="comments-text"
             id="additional-comments"
             name="comments"
+            wrap="true"
             onChange={onChangeHandler}
           />
         </label>

@@ -41,7 +41,7 @@ const DisplayTasks = (props) => {
 
   const saveDescription = async () => {
     try {
-      fetch(`http://localhost:5000/api/tasks/description/${taskId}`, {
+      await fetch(`http://localhost:5000/api/tasks/description/${taskId}`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -56,6 +56,21 @@ const DisplayTasks = (props) => {
       console.log(error);
     }
     setEnableEditDescription(false);
+  };
+
+  const deleteTask = async () => {
+    try {
+      await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+        credentials: 'include',
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload();
   };
 
   const createNewDiv = (
@@ -74,9 +89,9 @@ const DisplayTasks = (props) => {
             </button> */}
             <button
               type="button"
-              onClick={hideTask}
+              onClick={deleteTask}
               className="modal-delete-button">
-              CANCEL
+              DELETE
             </button>
           </React.Fragment>
         }>
