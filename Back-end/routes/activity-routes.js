@@ -19,7 +19,7 @@ router.post(
   addActivity,
 );
 
-router.get('/', AuthoriseUser, showActivities);
+router.get('/:tid', AuthoriseUser, showActivities);
 
 router.patch(
   '/:aid',

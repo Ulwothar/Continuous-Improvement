@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from '../../shared/UIComponents/Modal';
+import DisplayActivities from './DisplayActivities';
 import './DisplayTasks.css';
 
 const DisplayTasks = (props) => {
   const taskId = props.id;
-  const {
-    projectId,
-    status,
-    description,
-    startDate,
-    finishDate,
-    title,
-  } = props;
+  const { id, status, description, startDate, finishDate, title } = props;
 
   const [showFullTask, setShowFullTask] = useState(false);
   const [enableEditDescription, setEnableEditDescription] = useState(false);
@@ -95,32 +89,45 @@ const DisplayTasks = (props) => {
             </button>
           </React.Fragment>
         }>
-        <span>
-          <p>Start Date: </p>
-          <p>{startDate}</p>
-        </span>
-        <span>
-          <p>Finish Date: </p>
-          <p>{finishDate}</p>
-        </span>
-        <span>
-          <h4>Description: </h4>
-          <br />
-          <textarea
-            disabled={!enableEditDescription}
-            value={descriptionText}
-            onChange={changeDescription}></textarea>
-          <button
-            type="button"
-            onClick={
-              !enableEditDescription ? editDescription : saveDescription
-            }>
-            {!enableEditDescription ? 'Edit' : 'Save'}
-          </button>
-        </span>
-        <span>
-          <p>Activities: </p>
-        </span>
+        <div className="content-container">
+          <div className="task-dates">
+            <span>
+              <h4>Start Date: </h4>
+              <h5>{startDate}</h5>
+            </span>
+            <span>
+              <h4>Finish Date: </h4>
+              <h5>{finishDate}</h5>
+            </span>
+          </div>
+          <div className="task-description">
+            <span>
+              <h4>Description: </h4>
+              <br />
+              <textarea
+                disabled={!enableEditDescription}
+                value={descriptionText}
+                onChange={changeDescription}></textarea>
+              <button
+                type="button"
+                onClick={
+                  !enableEditDescription ? editDescription : saveDescription
+                }>
+                {!enableEditDescription ? 'Edit' : 'Save'}
+              </button>
+            </span>
+          </div>
+        </div>
+        {/* <div className="task-activities">
+          <span>
+            <h4>Activities: </h4>
+            <textarea placeholder="Add new activity here"></textarea>
+            <button type="button" className="add-activity-button">
+              SAVE
+            </button>
+          </span>
+        </div> */}
+        <DisplayActivities id={id} />
       </Modal>
     </React.Fragment>
   );

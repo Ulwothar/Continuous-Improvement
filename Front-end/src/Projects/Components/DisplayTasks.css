@@ -1,3 +1,60 @@
 .title-window {
     cursor: pointer;
 }
+.content-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.task-dates {
+    grid-column-start: 1;
+}
+
+.task-description {
+    grid-column-start: 2;
+}
+
+.task-description textarea {
+    max-width: 85%;
+    padding-top: 5px;
+    padding-left: 1rem;
+    border: 1px solid rgb(211, 205, 205);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    text-align: left;
+    display: inline;
+}
+
+.task-description textarea:disabled {
+    background-color: rgba(235, 226, 226, 0.8);
+}
+
+.task-description textarea:hover {
+    border: 1px solid rgb(153, 149, 149);
+}
+
+.task-activities {
+    max-width: 95%;
+}
+
+.task-activities textarea {
+    display: inline-block;
+    margin: auto;
+    height: 50px;
+    padding-top: 5px;
+    padding-left: 1rem;
+    border: 1px solid rgb(211, 205, 205);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    text-align: left;
+    width: 75%;
+}
+
+.task-activities textarea:hover {
+    border: 1px solid rgb(153, 149, 149);
+}
+
+.add-activity-button {
+    display: inline;
+    margin-left: 1em;
+}
