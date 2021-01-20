@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DatePicker } from 'react-rainbow-components';
 import Modal from '../../shared/UIComponents/Modal';
 import './CreateTask.css';
 
@@ -13,6 +14,12 @@ const CreateTask = (props) => {
   };
   const [addTaskModal, setAddTaskModal] = useState(false);
   const [newTask, setNewTask] = useState(dummyTask);
+  const [startDateState, setStartDateState] = useState(
+    Date().toString().slice(0, 24),
+  );
+  const [finishDateState, setFinishDateState] = useState(
+    Date().toString().slice(0, 24),
+  );
 
   const createTaskModal = () => {
     setAddTaskModal(true);
@@ -96,22 +103,44 @@ const CreateTask = (props) => {
           </label>
           <label className="create-task-label">
             <p>Start date: </p>
-            <input
+            {/* <input
               name="startDate"
               className="new-task-date"
               placeholder="Need a date picker..."
               type="text"
               onChange={changeHandler}
+            /> */}
+            <DatePicker
+              id="start-date-picker"
+              className="new-task-date"
+              value={startDateState}
+              onChange={(value) => {
+                setStartDateState(value);
+                setNewTask({ ...newTask, startDate: value });
+              }}
+              label=""
+              formatStyle="large"
             />
           </label>
           <label className="create-task-label">
             <p>Finish date: </p>
-            <input
+            {/* <input
               name="finishDate"
               className="new-task-date"
               placeholder="Need a date picker..."
               type="text"
               onChange={changeHandler}
+            /> */}
+            <DatePicker
+              id="start-date-picker"
+              className="start-date-picker"
+              value={finishDateState}
+              onChange={(value) => {
+                setFinishDateState(value);
+                setNewTask({ ...newTask, finishDate: value });
+              }}
+              label=""
+              formatStyle="large"
             />
           </label>
           <label className="create-task-description">

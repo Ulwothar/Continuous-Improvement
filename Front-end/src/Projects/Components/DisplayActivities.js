@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import './DisplayActivities.css';
 
 const DisplayActivities = (props) => {
-  const [allActivities, setAllActivities] = useState({});
+  const [allActivities, setAllActivities] = useState([]);
   const [activityText, setActivityText] = useState('');
+  const [reloadActivities, setReloadActivities] = useState(
+    allActivities !== undefined ? allActivities.length : 0,
+  );
   const { id } = props;
 
   const changeHandler = (event) => {
@@ -27,20 +31,8 @@ const DisplayActivities = (props) => {
       ...allActivities,
       activity: activityText,
     });
-  };
-
-  const deleteActivity = async () => {
-    try {
-      await fetch(`http://localhost:5000//api/activities/${id}`, {
-        method: 'DELETE',
-        credentials: 'include',
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    setReloadActivities(reloadActivities + 1);
+    setActivityText('');
   };
 
   useEffect(() => {
@@ -53,20 +45,19 @@ const DisplayActivities = (props) => {
         },
       })
         .then((res) => {
-          if (res.message) {
-            console.log(res.message);
-          }
           return res.json();
         })
         .then((result) => {
-          //console.log(result);
+          if (result.message) {
+            console.log(result.message);
+          }
           setAllActivities(result.activities);
         });
     } catch (error) {
-      //console.log(error.response.message);
+      console.log(error);
     }
-  }, []);
-  //console.log(allActivities);
+  }, [id, reloadActivities]);
+
   return (
     <div>
       <div className="task-activities">
@@ -76,8 +67,9 @@ const DisplayActivities = (props) => {
           value={activityText}
           onChange={changeHandler}></textarea>
         <button
-          type="button"
+          type="submit"
           className="save-activity-button"
+          disabled={activityText.length > 0 ? false : true}
           onClick={saveActivity}>
           SAVE
         </button>
@@ -86,10 +78,7 @@ const DisplayActivities = (props) => {
         allActivities.map((activity) => (
           <div className="task-activities" key={activity._id}>
             <br />
-            <textarea
-              placeholder="Add new activity here"
-              value={activity.activity}
-              disabled></textarea>
+            <p placeholder="Add new activity here">{activity.activity}</p>
             <button
               type="button"
               className="delete-activity-button"
@@ -108,6 +97,8 @@ const DisplayActivities = (props) => {
                 } catch (error) {
                   console.log(error);
                 }
+                //console.log(reloadActivities);
+                setReloadActivities(reloadActivities - 1);
               }}>
               DELETE
             </button>

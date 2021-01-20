@@ -1,0 +1,49 @@
+.task-activities textarea:disabled {
+    margin-left: 0;
+}
+
+.save-activity-button {
+    background-color: rgb(109, 235, 50);
+    height: 55px;
+    width: 70px;
+    color: rgb(44, 89, 236);
+    font-weight: bold;
+    text-align: center;
+    position:relative;
+    display: inline-block;
+    top: -1.6em;
+    left: 0.5em;
+    /* padding-top: 2.8em; */
+}
+
+.save-activity-button:hover{
+    background-color: rgb(33, 219, 9);
+    color: rgb(28, 53, 134);
+    cursor: pointer;
+}
+
+.save-activity-button:disabled{
+    background-color: rgb(145, 219, 135);
+    color: rgb(71, 105, 219);
+    cursor: unset;
+}
+
+.delete-activity-button {
+    background-color: rgb(235, 103, 103);
+    height: 55px;
+    width: 70px;
+    color: rgb(7, 30, 107);
+    font-weight: bold;
+    text-align: center;
+    position:relative;
+    display: inline-block;
+    top: -1.6em;
+    left: 0.5em;
+    /* padding-top: 2.8em; */
+}
+
+.delete-activity-button:hover{
+    background-color: rgb(185, 10, 10);
+    color: rgb(198, 207, 235);
+    cursor: pointer;
+}
