@@ -33,7 +33,7 @@ export const addActivity = async (req, res, next) => {
 };
 
 export const showActivities = async (req, res, next) => {
-  const taskId = req.body.taskId;
+  const taskId = req.params.tid;
   let activities;
 
   try {
@@ -48,7 +48,7 @@ export const showActivities = async (req, res, next) => {
 
   if (activities.length === 0) {
     return res
-      .status(404)
+      .status(500)
       .json({ message: 'There are no activities for this task yet.' });
   } else {
     res.status(200).json({

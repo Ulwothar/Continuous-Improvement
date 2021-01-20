@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '../../shared/UIComponents/Modal';
+import './CreateTask.css';
 
 const CreateTask = (props) => {
   const { status, id } = props;

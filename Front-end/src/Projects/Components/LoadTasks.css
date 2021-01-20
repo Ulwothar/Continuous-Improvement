@@ -46,9 +46,13 @@ h4{
     font-size: 1.6em;
     color: rgb(23, 67, 212);
 }
-h4:hover{
+
+.add-task:hover h4 {
     color: rgb(31, 159, 233);
 }
+/* h4:hover{
+    color: rgb(31, 159, 233);
+} */
 
 .create-task-label{
     grid-column-start: 1;
