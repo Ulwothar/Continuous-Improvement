@@ -47,9 +47,7 @@ export const showActivities = async (req, res, next) => {
   }
 
   if (activities.length === 0) {
-    return res
-      .status(500)
-      .json({ message: 'There are no activities for this task yet.' });
+    return res.json({ message: 'There are no activities for this task yet.' });
   } else {
     res.status(200).json({
       activities: activities.map((activity) =>

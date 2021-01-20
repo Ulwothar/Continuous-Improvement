@@ -1,4 +1,4 @@
-.create-task-container input{
+.new-task-title{
     display: inline-block;
     margin: auto;
     height: 30px;
@@ -8,10 +8,14 @@
     border-radius: 5px;
     font-size: 1.1rem;
     text-align: left;
+    width: 95%;
+}
+
+.create-task-container {
     width: 75%;
 }
 
-.create-task-container input:hover{
+.new-task-title:hover{
     border: 1px solid rgb(153, 149, 149);
 }
 

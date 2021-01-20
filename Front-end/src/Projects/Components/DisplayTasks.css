@@ -8,6 +8,15 @@
 
 .task-dates {
     grid-column-start: 1;
+    margin-top: 2em;
+}
+
+.task-dates h4 {
+    margin-top: 3em;
+}
+
+.task-dates h5 {
+    font-size: 1.5em;
 }
 
 .task-description {
@@ -33,6 +42,46 @@
     border: 1px solid rgb(153, 149, 149);
 }
 
+.description-edit-button {
+    background-color: rgb(235, 235, 50);
+    height: 55px;
+    width: 70px;
+    color: rgb(44, 89, 236);
+    font-weight: bold;
+    text-align: center;
+    position:relative;
+    display: inline-block;
+    top: -1.6em;
+    left: 0.5em;
+    /* padding-top: 2.8em; */
+}
+
+.description-save-button {
+    background-color: rgb(109, 235, 50);
+    height: 55px;
+    width: 70px;
+    color: rgb(44, 89, 236);
+    font-weight: bold;
+    text-align: center;
+    position:relative;
+    display: inline-block;
+    top: -1.6em;
+    left: 0.5em;
+    /* padding-top: 2.8em; */
+}
+
+.description-save-button:hover{
+    background-color: rgb(33, 219, 9);
+    color: rgb(28, 53, 134);
+    cursor: pointer;
+}
+
+.description-edit-button:hover{
+    background-color: rgb(219, 181, 9);
+    color: rgb(28, 53, 134);
+    cursor: pointer;
+}
+
 .task-activities {
     max-width: 95%;
 }
@@ -40,8 +89,9 @@
 .task-activities textarea {
     display: inline-block;
     margin: auto;
-    height: 50px;
-    padding-top: 5px;
+    height: auto;
+    min-height: 50px;
+    max-height: 200px;
     padding-left: 1rem;
     border: 1px solid rgb(211, 205, 205);
     border-radius: 5px;
@@ -54,7 +104,49 @@
     border: 1px solid rgb(153, 149, 149);
 }
 
+.task-activities p {
+    display: inline-block;
+    margin: auto;
+    height: auto;
+    min-height: 50px;
+    max-height: 200px;
+    padding-left: 1rem;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border: 1px solid rgb(211, 205, 205);
+    border-radius: 5px;
+    font-size: 1.1rem;
+    text-align: left;
+    white-space: pre-line;
+    width: 75%;
+    overflow-y: scroll;
+}
+
+.task-activities p:hover {
+    border: 1px solid rgb(153, 149, 149);
+}
+
 .add-activity-button {
     display: inline;
     margin-left: 1em;
 }
+
+.task-delete-button {
+    background-color:rgb(235, 103, 103);
+    height: 55px;
+    width: 120px;
+    color:  rgb(7, 30, 107);
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    right: -45%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  
+  .task-delete-button:hover {
+    background-color: rgb(185, 10, 10);
+    color: rgb(198, 207, 235);
+    cursor: pointer;
+  }

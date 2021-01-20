@@ -7,6 +7,15 @@
     text-align: center;
 }
 
+.create-task-container {
+    max-width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    column-gap: 1em;
+    text-align: center;
+}
+
 .task-status-todo{
     grid-column-start: 1;
     background-color: rgb(245, 243, 212);
@@ -60,12 +69,12 @@ h4{
     grid-template-columns: 1fr, 1fr;
     margin-top: 1em;
 }
-.create-task-label p {
+/* .create-task-label p {
     grid-column-start: 1;
     margin-right: auto;
-}
-.create-task-label input {
-    grid-column-start: 2;
+} */
+/* .create-task-label input {
+    grid-column-start: 1;
     max-width: 250px;
     width: 100%;
     position: absolute;
@@ -74,7 +83,7 @@ h4{
     border: 1px solid rgb(211, 205, 205);
   border-radius: 5px;
   padding-left: 0.5em;
-}
+} */
 
 .create-task-description {
     grid-column-start: 2;
@@ -99,11 +108,3 @@ h4{
   padding-top: 1em;
 }
 
-.create-task-container {
-    max-width: 80%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    column-gap: 1em;
-    text-align: left;
-}

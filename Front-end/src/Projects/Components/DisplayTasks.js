@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { DatePicker } from 'react-rainbow-components';
 import Modal from '../../shared/UIComponents/Modal';
 import DisplayActivities from './DisplayActivities';
 import './DisplayTasks.css';
@@ -11,6 +12,12 @@ const DisplayTasks = (props) => {
   const [showFullTask, setShowFullTask] = useState(false);
   const [enableEditDescription, setEnableEditDescription] = useState(false);
   const [descriptionText, setDescriptionText] = useState(description);
+  const [startDateState, setStartDateState] = useState(
+    startDate ? startDate : new Date().toString().slice(0, 24),
+  );
+  const [finishDateState, setFinishDateState] = useState(
+    startDate ? startDate : new Date().toString().slice(0, 24),
+  );
 
   const editDescription = () => {
     setEnableEditDescription(true);
@@ -84,7 +91,7 @@ const DisplayTasks = (props) => {
             <button
               type="button"
               onClick={deleteTask}
-              className="modal-delete-button">
+              className="task-delete-button">
               DELETE
             </button>
           </React.Fragment>
@@ -93,11 +100,25 @@ const DisplayTasks = (props) => {
           <div className="task-dates">
             <span>
               <h4>Start Date: </h4>
-              <h5>{startDate}</h5>
+              {/* <h5>{startDate}</h5>*/}
+
+              <DatePicker
+                className="start-date-picker"
+                value={startDateState}
+                onChange={(value) => setStartDateState(value)}
+                label=""
+                formatStyle="large"
+              />
             </span>
             <span>
               <h4>Finish Date: </h4>
-              <h5>{finishDate}</h5>
+              <DatePicker
+                className="start-date-picker"
+                value={finishDateState}
+                onChange={(value) => setFinishDateState(value)}
+                label=""
+                formatStyle="large"
+              />
             </span>
           </div>
           <div className="task-description">
@@ -110,10 +131,15 @@ const DisplayTasks = (props) => {
                 onChange={changeDescription}></textarea>
               <button
                 type="button"
+                className={
+                  !enableEditDescription
+                    ? 'description-edit-button'
+                    : 'description-save-button'
+                }
                 onClick={
                   !enableEditDescription ? editDescription : saveDescription
                 }>
-                {!enableEditDescription ? 'Edit' : 'Save'}
+                {!enableEditDescription ? 'EDIT' : 'SAVE'}
               </button>
             </span>
           </div>
