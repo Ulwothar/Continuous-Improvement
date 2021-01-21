@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { DatePicker } from 'react-rainbow-components';
+import { Draggable } from 'react-beautiful-dnd';
 import Modal from '../../shared/UIComponents/Modal';
 import DisplayActivities from './DisplayActivities';
 import './DisplayTasks.css';
 
 const DisplayTasks = (props) => {
   const taskId = props.id;
-  const { id, status, description, startDate, finishDate, title } = props;
+  const {
+    id,
+    status,
+    description,
+    startDate,
+    finishDate,
+    title,
+    index,
+  } = props;
 
   const [showFullTask, setShowFullTask] = useState(false);
   const [enableEditDescription, setEnableEditDescription] = useState(false);
@@ -16,7 +25,7 @@ const DisplayTasks = (props) => {
     startDate ? startDate : new Date().toString().slice(0, 24),
   );
   const [finishDateState, setFinishDateState] = useState(
-    startDate ? startDate : new Date().toString().slice(0, 24),
+    finishDate ? finishDate : new Date().toString().slice(0, 24),
   );
 
   const editDescription = () => {
@@ -76,9 +85,18 @@ const DisplayTasks = (props) => {
 
   const createNewDiv = (
     <React.Fragment>
-      <div className="title-window" onClick={showTask}>
-        <h3>{title}</h3>
-      </div>
+      <Draggable key={id} draggableId={id} index={index}>
+        {(provided) => (
+          <div
+            className="title-window"
+            onClick={showTask}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}>
+            <h3>{title}</h3>
+          </div>
+        )}
+      </Draggable>
       <Modal
         show={showFullTask}
         onCancel={hideTask}
