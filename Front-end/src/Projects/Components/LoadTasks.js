@@ -13,10 +13,7 @@ const LoadTasks = (props) => {
   const [doneTasks, setDoneTasks] = useState([]);
   const [projectTitle, setProjectTitle] = useState('');
 
-  let AllTasks,
-    changedTaskId = '',
-    taskStatus,
-    prevStatus;
+  let AllTasks;
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/tasks/${id}`, {
@@ -58,9 +55,7 @@ const LoadTasks = (props) => {
       });
   }, [id]);
 
-  const changeTaskStatus = () => {
-    //   let taskStatus = result.destination.droppableId.slice(12);
-    //   let prevStatus = result.source.droppableId.slice(12);
+  const changeTaskStatus = async (taskStatus, prevStatus, changedTaskId) => {
     let movedTask;
 
     if (taskStatus !== prevStatus) {
@@ -79,6 +74,12 @@ const LoadTasks = (props) => {
         let newDone = doneTasks.filter((task) => task._id !== changedTaskId);
         setDoneTasks(newDone);
       }
+      //movedTask = [...taskStatus, ...{ status: taskStatus }];
+      //console.log(movedTask.map((task) => (task.status = taskStatus)));
+      [movedTask[0].status] = movedTask.map(
+        (task) => (task.status = taskStatus),
+      );
+      console.log(movedTask);
 
       if (taskStatus === 'todo') {
         setTodoTasks([...todoTasks, ...movedTask]);
@@ -87,17 +88,21 @@ const LoadTasks = (props) => {
       } else if (taskStatus === 'done') {
         setDoneTasks([...doneTasks, ...movedTask]);
       }
+
+      return movedTask;
     }
+
+    return null;
   };
 
-  const handleOnDragEnd = (result) => {
+  const handleOnDragEnd = async (result) => {
     if (!result.destination) return;
     console.log(result);
     console.log(result.source.droppableId.slice(12));
     console.log(result.destination.droppableId.slice(12));
-    taskStatus = result.destination.droppableId.slice(12);
-    prevStatus = result.source.droppableId.slice(12);
-    changedTaskId = result.draggableId;
+    let taskStatus = result.destination.droppableId.slice(12);
+    let prevStatus = result.source.droppableId.slice(12);
+    let changedTaskId = result.draggableId;
     try {
       fetch(`http://localhost:5000/api/tasks/status/${changedTaskId}`, {
         method: 'PATCH',
@@ -138,7 +143,7 @@ const LoadTasks = (props) => {
     //     setDoneTasks([...doneTasks, ...movedTask]);
     //   }
     // }
-    changeTaskStatus();
+    await changeTaskStatus(taskStatus, prevStatus, changedTaskId);
     //console.log(movedTask);
   };
   console.log({ todo: todoTasks, ongoing: ongoingTasks, done: doneTasks });
@@ -151,8 +156,8 @@ const LoadTasks = (props) => {
         <div className="all-tasks-wrapper">
           <h3>{projectTitle}</h3>
           <DragDropContext onDragEnd={handleOnDragEnd}>
-            <div className="tasks-container">
-              <Droppable droppableId="task-status-todo">
+            <div className="tasks-container" key="tasks-container">
+              <Droppable droppableId="task-status-todo" key="task-status-todo">
                 {(provided) => (
                   <div
                     className="task-status-todo"
@@ -187,7 +192,9 @@ const LoadTasks = (props) => {
                   </div>
                 )}
               </Droppable>
-              <Droppable droppableId="task-status-ongoing">
+              <Droppable
+                droppableId="task-status-ongoing"
+                key="task-status-ongoing">
                 {(provided) => (
                   <div
                     className="task-status-ongoing"
@@ -222,7 +229,7 @@ const LoadTasks = (props) => {
                   </div>
                 )}
               </Droppable>
-              <Droppable droppableId="task-status-done">
+              <Droppable droppableId="task-status-done" key="task-status-done">
                 {(provided) => (
                   <div
                     className="task-status-done"
