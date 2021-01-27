@@ -5,7 +5,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import dotenv from 'dotenv';
+//import dotenv from 'dotenv';
 
 import MainNavigation from './shared/components/MainNavigation';
 import NewSuggestion from './Projects/Pages/NewSuggestion';
@@ -21,8 +21,10 @@ import './App.css';
 import CookieCheck from './shared/context/CookieCheck';
 
 function App() {
-  dotenv.config();
+  //dotenv.config();
   const [isLogged, setIsLogged] = useState(CookieCheck);
+
+  console.log(process.env.REACT_APP_POST_NEW_SUGGESTION);
 
   const login = useCallback(() => {
     setIsLogged(true);
@@ -32,55 +34,94 @@ function App() {
     setIsLogged(false);
   }, []);
 
-  let routes;
+  // let routes;
 
-  if (!isLogged) {
-    routes = (
-      <Switch>
-        <Route path="/" exact>
-          <NewSuggestion />
-        </Route>
-        <Route path="/authenticate" exact>
-          <Authenticate />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    );
-  } else {
-    routes = (
-      <Switch>
-        <Route path="/" exact>
-          <NewSuggestion />
-        </Route>
-        <Route path="/new" exact>
-          <RecentSuggestion />
-        </Route>
-        <Route path="/ongoing" exact>
-          <CurrentProjects />
-        </Route>
-        <Route path="/finished" exact>
-          <FinishedProjects />
-        </Route>
-        <Route path="/states" exact>
-          <AllProjects />
-        </Route>
-        <Route path="/states/:pid" exact>
-          <ShowTasks />
-        </Route>
-        <Route path="/projects/:pid" exact>
-          <ReviewSuggestion />
-        </Route>
-        <Redirect to="/new" />
-      </Switch>
-    );
-  }
+  // if (!isLogged) {
+  //   routes = (
+  //     <Switch>
+  //       <Route path="/" exact>
+  //         <NewSuggestion />
+  //       </Route>
+  //       <Route path="/authenticate" exact>
+  //         <Authenticate />
+  //       </Route>
+  //       <Redirect to="/" />
+  //     </Switch>
+  //   );
+  // } else {
+  //   routes = (
+  //     <Switch>
+  //       <Route path="/" exact>
+  //         <NewSuggestion />
+  //       </Route>
+  //       <Route path="/new" exact>
+  //         <RecentSuggestion />
+  //       </Route>
+  //       <Route path="/ongoing" exact>
+  //         <CurrentProjects />
+  //       </Route>
+  //       <Route path="/finished" exact>
+  //         <FinishedProjects />
+  //       </Route>
+  //       <Route path="/states" exact>
+  //         <AllProjects />
+  //       </Route>
+  //       <Route path="/states/:pid" exact>
+  //         <ShowTasks />
+  //       </Route>
+  //       <Route path="/projects/:pid" exact>
+  //         <ReviewSuggestion />
+  //       </Route>
+  //       <Redirect to="/new" />
+  //     </Switch>
+  //   );
+  // }
+
+  console.log(isLogged);
 
   return (
     <AuthContext.Provider
       value={{ isLogged: isLogged, login: login, logout: logout }}>
       <Router>
         <MainNavigation />
-        <main>{routes}</main>
+        <main>
+          {!isLogged ? (
+            <Switch>
+              <Route path="/" exact>
+                <NewSuggestion />
+              </Route>
+              <Route path="/authenticate" exact>
+                <Authenticate />
+              </Route>
+              <Redirect to="/" />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route path="/" exact>
+                <NewSuggestion />
+              </Route>
+              <Route path="/new" exact>
+                <RecentSuggestion />
+              </Route>
+              <Route path="/ongoing" exact>
+                <CurrentProjects />
+              </Route>
+              <Route path="/finished" exact>
+                <FinishedProjects />
+              </Route>
+              <Route path="/states" exact>
+                <AllProjects />
+              </Route>
+              <Route path="/states/:pid" exact>
+                <ShowTasks />
+              </Route>
+              <Route path="/projects/:pid" exact>
+                <ReviewSuggestion />
+              </Route>
+              <Redirect to="/new" />
+            </Switch>
+          )}
+        </main>
       </Router>
     </AuthContext.Provider>
   );

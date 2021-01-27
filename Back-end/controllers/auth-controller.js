@@ -24,6 +24,6 @@ export const AuthoriseUser = async (req, res, next) => {
     }
   }
 
-  cookies.set('accessToken', accessToken);
+  cookies.set('accessToken', accessToken, { sameSite: 'strict' });
   next();
 };

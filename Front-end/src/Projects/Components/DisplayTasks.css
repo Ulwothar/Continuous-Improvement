@@ -36,6 +36,7 @@
 
 .task-description textarea:disabled {
     background-color: rgba(235, 226, 226, 0.8);
+    cursor: not-allowed;
 }
 
 .task-description textarea:hover {

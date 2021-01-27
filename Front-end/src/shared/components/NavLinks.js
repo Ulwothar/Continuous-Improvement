@@ -25,46 +25,43 @@ const NavLinks = () => {
   return (
     <span className="nav-links">
       {auth.isLogged && (
-        <li>
-          <NavLink to="/" exact>
-            NEW SUGGESTION
-          </NavLink>
-        </li>
-      )}
-      {auth.isLogged && (
-        <li>
-          <button onClick={LogOut} className="log-button">
-            LOG OUT
-          </button>
-        </li>
-      )}
-      {auth.isLogged && (
-        <li>
-          <NavLink to="/new" exact>
-            RECENT SUGGESTIONS
-          </NavLink>
-        </li>
-      )}
-      {auth.isLogged && (
-        <li>
-          <NavLink to="/ongoing" exact>
-            CURRENT PROJECTS
-          </NavLink>
-        </li>
-      )}
-      {auth.isLogged && (
-        <li>
-          <NavLink to="/finished" exact>
-            FINISHED
-          </NavLink>
-        </li>
-      )}
-      {auth.isLogged && (
-        <li>
-          <NavLink to="/states" exact>
-            PROJECTS
-          </NavLink>
-        </li>
+        <>
+          <li>
+            <NavLink to="/" exact>
+              NEW SUGGESTION
+            </NavLink>
+          </li>
+
+          <li>
+            <button onClick={LogOut} className="log-button">
+              LOG OUT
+            </button>
+          </li>
+
+          <li>
+            <NavLink to="/new" exact>
+              RECENT SUGGESTIONS
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/ongoing" exact>
+              CURRENT PROJECTS
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/finished" exact>
+              FINISHED
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/states" exact>
+              PROJECTS
+            </NavLink>
+          </li>
+        </>
       )}
     </span>
   );

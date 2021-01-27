@@ -64,9 +64,12 @@ export const userLogin = async (req, res, next) => {
       const tokens = await CreateTokens(user);
       //Setting auth cookies
       const cookies = new Cookies(req, res);
-      cookies.set('accessToken', tokens.accessToken);
-      cookies.set('refreshToken', tokens.refreshToken);
-      cookies.set('user', checkUser.login, { httpOnly: false });
+      cookies.set('accessToken', tokens.accessToken, { sameSite: 'strict' });
+      cookies.set('refreshToken', tokens.refreshToken, { sameSite: 'strict' });
+      cookies.set('user', checkUser.login, {
+        httpOnly: false,
+        sameSite: 'strict',
+      });
       // console.log({
       //   accessToken: tokens.accessToken,
       //   refreshToken: tokens.refreshToken,
