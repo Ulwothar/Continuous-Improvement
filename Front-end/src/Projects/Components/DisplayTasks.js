@@ -84,7 +84,7 @@ const DisplayTasks = (props) => {
   };
 
   const createNewDiv = (
-    <React.Fragment>
+    <>
       <Draggable key={id} draggableId={id} index={index}>
         {(provided) => (
           <div
@@ -101,6 +101,7 @@ const DisplayTasks = (props) => {
         show={showFullTask}
         onCancel={hideTask}
         header={title}
+        contentClass="modal-content-wrapper"
         footer={
           <React.Fragment>
             {/* <button type="submit" className="modal-cancel-button">
@@ -173,13 +174,15 @@ const DisplayTasks = (props) => {
         </div> */}
         <DisplayActivities id={id} />
       </Modal>
-    </React.Fragment>
+    </>
   );
 
-  return ReactDOM.createPortal(
-    createNewDiv,
-    document.getElementsByClassName(`task-status-${status}`)[0],
-  );
+  //   return ReactDOM.createPortal(
+  //     createNewDiv,
+  //     document.getElementsByClassName(`task-status-${status}`)[0],
+  //   );
+
+  return createNewDiv;
 };
 
 export default DisplayTasks;
