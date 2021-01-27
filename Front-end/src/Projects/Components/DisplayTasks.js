@@ -49,7 +49,8 @@ const DisplayTasks = (props) => {
     setDescriptionText(event.target.value);
   };
 
-  const saveDescription = async () => {
+  const saveDescription = async (event) => {
+    event.preventDefault();
     try {
       await fetch(`http://localhost:5000/api/tasks/description/${taskId}`, {
         method: 'PATCH',
@@ -68,7 +69,8 @@ const DisplayTasks = (props) => {
     setEnableEditDescription(false);
   };
 
-  const deleteTask = async () => {
+  const deleteTask = async (event) => {
+    event.preventDefault();
     try {
       await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
         credentials: 'include',
