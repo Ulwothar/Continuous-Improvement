@@ -49,10 +49,8 @@ const CreateTask = (props) => {
     } catch (error) {
       console.log(error);
     }
-    console.log(newTask);
     setAddTaskModal(false);
     window.location.reload();
-    //console.log(newTask);
   };
 
   let thisName = '';
@@ -63,7 +61,6 @@ const CreateTask = (props) => {
       ...newTask,
       [thisName]: event.target.value,
     });
-    //console.log(newTask);
   };
 
   return (
@@ -103,13 +100,6 @@ const CreateTask = (props) => {
           </label>
           <label className="create-task-label">
             <p>Start date: </p>
-            {/* <input
-              name="startDate"
-              className="new-task-date"
-              placeholder="Need a date picker..."
-              type="text"
-              onChange={changeHandler}
-            /> */}
             <DatePicker
               id="start-date-picker"
               className="new-task-date"
@@ -124,13 +114,6 @@ const CreateTask = (props) => {
           </label>
           <label className="create-task-label">
             <p>Finish date: </p>
-            {/* <input
-              name="finishDate"
-              className="new-task-date"
-              placeholder="Need a date picker..."
-              type="text"
-              onChange={changeHandler}
-            /> */}
             <DatePicker
               id="start-date-picker"
               className="start-date-picker"

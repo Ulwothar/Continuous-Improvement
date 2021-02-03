@@ -24,7 +24,7 @@ function App() {
   //dotenv.config();
   const [isLogged, setIsLogged] = useState(CookieCheck);
 
-  console.log(process.env.REACT_APP_POST_NEW_SUGGESTION);
+  //console.log(process.env.REACT_APP_POST_NEW_SUGGESTION);
 
   const login = useCallback(() => {
     setIsLogged(true);

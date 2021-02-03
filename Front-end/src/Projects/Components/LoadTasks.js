@@ -20,23 +20,17 @@ const LoadTasks = (props) => {
       credentials: 'include',
     })
       .then((res) => {
-        // console.log(res.status);
         return res.json();
       })
       .then((result) => {
-        // console.log(result);
         if (!result.tasks) {
           setProjectsTasks(result);
         } else {
           let tasks = result.tasks;
           setProjectsTasks(result.tasks);
-
-          let todo = tasks.filter((task) => task.status === 'todo');
-          let ongoing = tasks.filter((task) => task.status === 'ongoing');
-          let done = tasks.filter((task) => task.status === 'done');
-          setTodoTasks(todo);
-          setOngoingTasks(ongoing);
-          setDoneTasks(done);
+          setTodoTasks(tasks.filter((task) => task.status === 'todo'));
+          setOngoingTasks(tasks.filter((task) => task.status === 'ongoing'));
+          setDoneTasks(tasks.filter((task) => task.status === 'done'));
         }
       });
 
@@ -74,12 +68,9 @@ const LoadTasks = (props) => {
         let newDone = doneTasks.filter((task) => task._id !== changedTaskId);
         setDoneTasks(newDone);
       }
-      //movedTask = [...taskStatus, ...{ status: taskStatus }];
-      //console.log(movedTask.map((task) => (task.status = taskStatus)));
       [movedTask[0].status] = movedTask.map(
         (task) => (task.status = taskStatus),
       );
-      console.log(movedTask);
 
       if (taskStatus === 'todo') {
         setTodoTasks([...todoTasks, ...movedTask]);
@@ -97,12 +88,9 @@ const LoadTasks = (props) => {
 
   const handleOnDragEnd = async (result) => {
     if (!result.destination) return;
-    console.log(result);
-    console.log(result.source.droppableId.slice(12));
-    console.log(result.destination.droppableId.slice(12));
-    let taskStatus = result.destination.droppableId.slice(12);
-    let prevStatus = result.source.droppableId.slice(12);
-    let changedTaskId = result.draggableId;
+    const taskStatus = result.destination.droppableId.slice(12);
+    const prevStatus = result.source.droppableId.slice(12);
+    const changedTaskId = result.draggableId;
     try {
       fetch(`http://localhost:5000/api/tasks/status/${changedTaskId}`, {
         method: 'PATCH',
@@ -115,41 +103,8 @@ const LoadTasks = (props) => {
     } catch (error) {
       console.log(error);
     }
-
-    //setProjectsTasks({ message: 'messing up with tasks, be back soon...' });
-
-    // if (taskStatus !== prevStatus) {
-    //   if (prevStatus === 'todo') {
-    //     movedTask = todoTasks.filter((task) => task._id === changedTaskId);
-    //     let newToDo = todoTasks.filter((task) => task._id !== changedTaskId);
-    //     setTodoTasks(newToDo);
-    //   } else if (prevStatus === 'ongoing') {
-    //     movedTask = ongoingTasks.filter((task) => task._id === changedTaskId);
-    //     let newOngoing = ongoingTasks.filter(
-    //       (task) => task._id !== changedTaskId,
-    //     );
-    //     setOngoingTasks(newOngoing);
-    //   } else if (prevStatus === 'done') {
-    //     movedTask = doneTasks.filter((task) => task._id === changedTaskId);
-    //     let newDone = doneTasks.filter((task) => task._id !== changedTaskId);
-    //     setDoneTasks(newDone);
-    //   }
-
-    //   if (taskStatus === 'todo') {
-    //     setTodoTasks([...todoTasks, ...movedTask]);
-    //   } else if (taskStatus === 'ongoing') {
-    //     setOngoingTasks([...ongoingTasks, ...movedTask]);
-    //   } else if (taskStatus === 'done') {
-    //     setDoneTasks([...doneTasks, ...movedTask]);
-    //   }
-    // }
     await changeTaskStatus(taskStatus, prevStatus, changedTaskId);
-    //console.log(movedTask);
   };
-  console.log({ todo: todoTasks, ongoing: ongoingTasks, done: doneTasks });
-
-  //   if (!projectTasks.message) {
-  //alert(projectTasks.message);
 
   !projectTasks.message
     ? (AllTasks = (

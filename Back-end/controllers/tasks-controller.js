@@ -135,8 +135,52 @@ export const updateStatus = async (req, res, next) => {
     console.log(error);
     return res
       .status(500)
-      .json({ message: 'Could not modify this task, please try again.' });
+      .json({ error: 'Could not modify this task, please try again.' });
   }
 
   res.status(201).json({ message: 'Status updated.' });
+};
+
+export const updateStartDate = async (req, res, next) => {
+  const id = req.params.tid;
+  const startDate = req.body;
+
+  console.log(startDate);
+
+  if (!startDate.startDate) {
+    return res.status(400).json({ error: 'No start date provided.' });
+  }
+
+  try {
+    await Task.findByIdAndUpdate(id, startDate, { useFindAndModify: false });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ error: 'Could not update start date for this task.' });
+  }
+
+  res.status(201).json({ message: 'Start date updated.' });
+};
+
+export const updateFinishDate = async (req, res, next) => {
+  const id = req.params.tid;
+  const finishDate = req.body;
+
+  console.log(finishDate);
+
+  if (!finishDate.finishDate) {
+    return res.status(400).json({ error: 'No finish date provided.' });
+  }
+
+  try {
+    await Task.findByIdAndUpdate(id, finishDate, { useFindAndModify: false });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ error: 'Could not update finish date for this task.' });
+  }
+
+  res.status(201).json({ message: 'Finish date updated.' });
 };
