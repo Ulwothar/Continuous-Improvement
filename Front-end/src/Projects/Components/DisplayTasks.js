@@ -85,6 +85,38 @@ const DisplayTasks = (props) => {
     window.location.reload();
   };
 
+  async function updateStartDate(value) {
+    setStartDateState(value);
+    await fetch(`http://localhost:5000/api/tasks/update/start-date/${taskId}`, {
+      credentials: 'include',
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        startDate: value,
+      }),
+    });
+  }
+
+  async function updateFinishDate(value) {
+    setFinishDateState(value);
+    console.log(value);
+    await fetch(
+      `http://localhost:5000/api/tasks/update/finish-date/${taskId}`,
+      {
+        credentials: 'include',
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          finishDate: value,
+        }),
+      },
+    );
+  }
+
   const createNewDiv = (
     <>
       <Draggable key={id} draggableId={id} index={index}>
@@ -126,7 +158,7 @@ const DisplayTasks = (props) => {
               <DatePicker
                 className="start-date-picker"
                 value={startDateState}
-                onChange={(value) => setStartDateState(value)}
+                onChange={(value) => updateStartDate(value)}
                 label=""
                 formatStyle="large"
               />
@@ -136,7 +168,7 @@ const DisplayTasks = (props) => {
               <DatePicker
                 className="start-date-picker"
                 value={finishDateState}
-                onChange={(value) => setFinishDateState(value)}
+                onChange={(value) => updateFinishDate(value)}
                 label=""
                 formatStyle="large"
               />
