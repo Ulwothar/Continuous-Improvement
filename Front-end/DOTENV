@@ -1,3 +1,5 @@
+#Please chage this file name to .env
+
 #API routes:
 REACT_APP_GET_PROJECTS_BY_STATUS='https://.../api/projects/status/'
 REACT_APP_GET_PROJECT_BY_ID='https://.../api/projects/'
