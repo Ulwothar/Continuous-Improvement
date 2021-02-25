@@ -5,7 +5,6 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-//import dotenv from 'dotenv';
 
 import MainNavigation from './shared/components/MainNavigation';
 import NewSuggestion from './Projects/Pages/NewSuggestion';
@@ -33,49 +32,6 @@ function App() {
   const logout = useCallback(() => {
     setIsLogged(false);
   }, []);
-
-  // let routes;
-
-  // if (!isLogged) {
-  //   routes = (
-  //     <Switch>
-  //       <Route path="/" exact>
-  //         <NewSuggestion />
-  //       </Route>
-  //       <Route path="/authenticate" exact>
-  //         <Authenticate />
-  //       </Route>
-  //       <Redirect to="/" />
-  //     </Switch>
-  //   );
-  // } else {
-  //   routes = (
-  //     <Switch>
-  //       <Route path="/" exact>
-  //         <NewSuggestion />
-  //       </Route>
-  //       <Route path="/new" exact>
-  //         <RecentSuggestion />
-  //       </Route>
-  //       <Route path="/ongoing" exact>
-  //         <CurrentProjects />
-  //       </Route>
-  //       <Route path="/finished" exact>
-  //         <FinishedProjects />
-  //       </Route>
-  //       <Route path="/states" exact>
-  //         <AllProjects />
-  //       </Route>
-  //       <Route path="/states/:pid" exact>
-  //         <ShowTasks />
-  //       </Route>
-  //       <Route path="/projects/:pid" exact>
-  //         <ReviewSuggestion />
-  //       </Route>
-  //       <Redirect to="/new" />
-  //     </Switch>
-  //   );
-  // }
 
   console.log(isLogged);
 

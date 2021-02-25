@@ -15,15 +15,18 @@ export const AuthoriseUser = async (req, res, next) => {
     if (newAccessToken != null) {
       accessToken = newAccessToken;
     } else {
-      cookies.set('user');
-      cookies.set('accessToken');
-      cookies.set('refreshToken');
+      cookies.set('user', '', { domain: '.yourdomain' });
+      cookies.set('accessToken', '', { domain: '.yourdomain' });
+      cookies.set('refreshToken', '', { domain: '.yourdomain' });
       return res.status(401).json({
         message: 'Invalid tokens, please try logging in again.',
       });
     }
   }
 
-  cookies.set('accessToken', accessToken, { sameSite: 'strict' });
+  cookies.set('accessToken', accessToken, {
+    sameSite: 'strict',
+    domain: '.yourdomain',
+  });
   next();
 };

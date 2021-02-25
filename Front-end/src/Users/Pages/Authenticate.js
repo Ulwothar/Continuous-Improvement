@@ -3,11 +3,6 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../shared/context/AuthContext';
 import './Authenticate.css';
 
-// const DUMMY_USER = {
-//   name: 'Mateusz',
-//   password: 'qwerty',
-// };
-
 let userDetails = {
   userName: '',
   password: '',
@@ -46,7 +41,6 @@ const Authenticate = () => {
     }
 
     if (document.cookie) {
-      //console.log(document.cookie);     //Checking if no httpOnly cookie was
       auth.login();
     } else {
       console.log('Wrong username or password'); //ToDo: add invalid input handler for user info

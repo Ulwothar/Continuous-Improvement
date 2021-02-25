@@ -1,17 +1,14 @@
 {
   "name": "continuous-improvement",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "dotenv": "^8.2.0",
+  "dependencies": {    
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-rainbow-components": "^1.24.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "react-select": "^3.1.0",
     "react-transition-group": "^4.4.1"
@@ -21,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy-production": "react-scripts build && scp -r ./build/* root@109.228.40.187:/var/www/html"
+    "deploy-production": "react-scripts build && scp -r ./build/* root@109.228.40.187:/var/www/html/CI"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,8 +35,14 @@
       "last 1 safari version"
     ]
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "Continuous Improvement react app.",
   "main": "index.js",
   "author": "Ulwothar <mateuszkrp@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://improvement.mattkrp.co.uk",
+  "devDependencies": {
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/user-event": "^7.1.2"
+  }
 }
