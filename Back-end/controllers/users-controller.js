@@ -64,11 +64,18 @@ export const userLogin = async (req, res, next) => {
       const tokens = await CreateTokens(user);
       //Setting auth cookies
       const cookies = new Cookies(req, res);
-      cookies.set('accessToken', tokens.accessToken, { sameSite: 'strict' });
-      cookies.set('refreshToken', tokens.refreshToken, { sameSite: 'strict' });
+      cookies.set('accessToken', tokens.accessToken, {
+        sameSite: 'strict',
+        domain: '.yourdomain',
+      });
+      cookies.set('refreshToken', tokens.refreshToken, {
+        sameSite: 'strict',
+        domain: '.yourdomain',
+      });
       cookies.set('user', checkUser.login, {
         httpOnly: false,
-        sameSite: 'strict',
+        sameSite: 'lax',
+        domain: '.yourdomain',
       });
       // console.log({
       //   accessToken: tokens.accessToken,
@@ -91,8 +98,8 @@ export const userLogout = async (req, res, next) => {
   const refreshToken = cookies.get('refreshToken');
   const name = cookies.get('user');
   const tokenDelete = await DeleteToken(refreshToken, name);
-  cookies.set('user');
-  cookies.set('accessToken');
-  cookies.set('refreshToken');
+  cookies.set('user', '', { domain: '.yourdomain' });
+  cookies.set('accessToken', '', { domain: '.yourdomain' });
+  cookies.set('refreshToken', '', { domain: '.yourdomain' });
   res.status(200).json({ message: 'Loggin out successful' });
 };

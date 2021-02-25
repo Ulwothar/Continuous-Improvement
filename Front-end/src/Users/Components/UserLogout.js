@@ -1,6 +1,3 @@
-// import { useContext } from 'react';
-// import { AuthContext } from '../../shared/context/AuthContext';
-
 const UserLogout = async () => {
   //let auth = useContext(AuthContext);
   console.log('user logout copmponent');

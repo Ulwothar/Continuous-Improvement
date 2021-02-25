@@ -1,5 +1,10 @@
 .title-window {
     cursor: pointer;
+    
+}
+
+.title-window h3 {
+    padding-bottom: 5px;
 }
 .content-container {
     display: grid;
