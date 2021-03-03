@@ -13,7 +13,7 @@ const LoadProjects = (props) => {
 
   useEffect(() => {
     let isMounted = true;
-    fetch(`http://localhost:5000/api/projects/status/${status}`, {
+    fetch(process.env.REACT_APP_GET_PROJECTS_BY_STATUS + status, {
       method: 'GET',
       credentials: 'include',
     })

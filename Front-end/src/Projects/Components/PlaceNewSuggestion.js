@@ -1,6 +1,6 @@
 const PlaceNewSuggestion = async (props) => {
   try {
-    const request = await fetch(`http://localhost:5000/api/projects/`, {
+    const request = await fetch(process.env.REACT_APP_POST_NEW_SUGGESTION, {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',

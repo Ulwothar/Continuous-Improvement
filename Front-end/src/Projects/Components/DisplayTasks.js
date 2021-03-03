@@ -52,7 +52,7 @@ const DisplayTasks = (props) => {
   const saveDescription = async (event) => {
     event.preventDefault();
     try {
-      await fetch(`http://localhost:5000/api/tasks/description/${taskId}`, {
+      await fetch(process.env.REACT_APP_CHANGE_TASK_DESCRIPTION + taskId, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -72,7 +72,7 @@ const DisplayTasks = (props) => {
   const deleteTask = async (event) => {
     event.preventDefault();
     try {
-      await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+      await fetch(process.env.REACT_APP_TASKS + taskId, {
         credentials: 'include',
         method: 'DELETE',
         headers: {
@@ -87,7 +87,7 @@ const DisplayTasks = (props) => {
 
   async function updateStartDate(value) {
     setStartDateState(value);
-    await fetch(`http://localhost:5000/api/tasks/update/start-date/${taskId}`, {
+    await fetch(process.env.REACT_APP_UPDATE_START_DATE + taskId, {
       credentials: 'include',
       method: 'PATCH',
       headers: {
@@ -103,7 +103,7 @@ const DisplayTasks = (props) => {
     setFinishDateState(value);
     console.log(value);
     await fetch(
-      `http://localhost:5000/api/tasks/update/finish-date/${taskId}`,
+      process.env.REACT_APP_UPDATE_FINISH_DATE + taskId,
       {
         credentials: 'include',
         method: 'PATCH',
