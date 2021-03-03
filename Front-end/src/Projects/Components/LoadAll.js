@@ -13,7 +13,7 @@ const LoadAll = (props) => {
   useEffect(() => {
     const getProjects = async () => {
       try {
-        await fetch(`http://localhost:5000/api/projects/status/${status[0]}`, {
+        await fetch(process.env.REACT_APP_GET_PROJECTS_BY_STATUS + status[0], {
           method: 'GET',
           credentials: 'include',
         })
@@ -35,7 +35,7 @@ const LoadAll = (props) => {
       }
 
       try {
-        await fetch(`http://localhost:5000/api/projects/status/${status[1]}`, {
+        await fetch(process.env.REACT_APP_GET_PROJECTS_BY_STATUS + status[1], {
           method: 'GET',
           credentials: 'include',
         })
@@ -57,7 +57,7 @@ const LoadAll = (props) => {
       }
 
       try {
-        await fetch(`http://localhost:5000/api/projects/status/${status[2]}`, {
+        await fetch(process.env.REACT_APP_GET_PROJECTS_BY_STATUS + status[2], {
           method: 'GET',
           credentials: 'include',
         })

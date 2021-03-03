@@ -15,7 +15,7 @@ const DisplayActivities = (props) => {
 
   const saveActivity = async () => {
     try {
-      await fetch(`http://localhost:5000/api/activities`, {
+      await fetch(process.env.REACT_APP_ACTIVITIES, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -37,7 +37,7 @@ const DisplayActivities = (props) => {
 
   useEffect(() => {
     try {
-      fetch(`http://localhost:5000/api/activities/${id}`, {
+      fetch(process.env.REACT_APP_ACTIVITIES + id, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -84,16 +84,13 @@ const DisplayActivities = (props) => {
               className="delete-activity-button"
               onClick={async () => {
                 try {
-                  await fetch(
-                    `http://localhost:5000/api/activities/${activity._id}`,
-                    {
-                      method: 'DELETE',
-                      credentials: 'include',
-                      headers: {
-                        'content-type': 'application/json',
-                      },
+                  await fetch(process.env.REACT_APP_ACTIVITIES + activity._id, {
+                    method: 'DELETE',
+                    credentials: 'include',
+                    headers: {
+                      'content-type': 'application/json',
                     },
-                  );
+                  });
                 } catch (error) {
                   console.log(error);
                 }

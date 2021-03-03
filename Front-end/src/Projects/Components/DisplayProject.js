@@ -50,7 +50,7 @@ const DisplayProject = (props) => {
     event.target.reset();
     //addComments(newComment);
     try {
-      await fetch(`http://localhost:5000/api/comments/${id}`, {
+      await fetch(process.env.REACT_APP_COMMENTS + id, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -69,7 +69,7 @@ const DisplayProject = (props) => {
 
   const deleteProjectHandler = async () => {
     try {
-      await fetch(`http://localhost:5000/api/projects/${id}`, {
+      await fetch(process.env.REACT_APP_GET_PROJECT_BY_ID + id, {
         method: 'DELETE',
         headers: {
           'content-type': 'applicaton/json',
@@ -85,7 +85,7 @@ const DisplayProject = (props) => {
 
   async function fetchChangeStatus(status, id) {
     try {
-      await fetch(`http://localhost:5000/api/projects/status/${id}`, {
+      await fetch(process.env.REACT_APP_GET_PROJECTS_BY_STATUS + id, {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',
@@ -113,7 +113,7 @@ const DisplayProject = (props) => {
 
   async function fetchComments(id) {
     try {
-      await fetch(`http://localhost:5000/api/comments/${id}`, {
+      await fetch(process.env.REACT_APP_COMMENTS + id, {
         credentials: 'include',
       })
         .then((res) => res.json())
@@ -230,7 +230,7 @@ const DisplayProject = (props) => {
                     className="delete-comment-button"
                     onClick={async () => {
                       await fetch(
-                        `http://localhost:5000/api/comments/${revComment._id}`,
+                        process.env.REACT_APP_COMMENTS + revComment._id,
                         {
                           method: 'DELETE',
                           headers: {

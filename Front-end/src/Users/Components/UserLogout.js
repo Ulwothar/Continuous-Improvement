@@ -3,7 +3,7 @@ const UserLogout = async () => {
   console.log('user logout copmponent');
   try {
     console.log('before fetching');
-    await fetch('http://localhost:5000/api/users/logout', {
+    await fetch(process.env.REACT_APP_USER_LOGOUT, {
       method: 'DELETE',
       credentials: 'include',
       headers: {
