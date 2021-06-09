@@ -45,3 +45,7 @@
   border-color: khaki;
   color: khaki;
 }
+
+li{
+  text-decoration: none;
+}
