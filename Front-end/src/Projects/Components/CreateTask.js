@@ -32,7 +32,7 @@ const CreateTask = (props) => {
   const confimCreatingTask = async (event) => {
     event.preventDefault();
     try {
-      await fetch(`http://localhost:5000/api/tasks/${id}`, {
+      await fetch(process.env.REACT_APP_TASKS + id, {
         method: 'POST',
         credentials: 'include',
         headers: {

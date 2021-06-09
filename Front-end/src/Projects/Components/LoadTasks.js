@@ -16,7 +16,7 @@ const LoadTasks = (props) => {
   let AllTasks;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/tasks/${id}`, {
+    fetch(process.env.REACT_APP_LOAD_TASKS + id, {
       credentials: 'include',
     })
       .then((res) => {
@@ -34,7 +34,7 @@ const LoadTasks = (props) => {
         }
       });
 
-    fetch(`http://localhost:5000/api/projects/${id}`, {
+    fetch(process.env.REACT_APP_GET_PROJECT_BY_ID + id, {
       credentials: 'include',
     })
       .then((res) => {
@@ -92,7 +92,7 @@ const LoadTasks = (props) => {
     const prevStatus = result.source.droppableId.slice(12);
     const changedTaskId = result.draggableId;
     try {
-      fetch(`http://localhost:5000/api/tasks/status/${changedTaskId}`, {
+      fetch(process.env.REACT_APP_CHANGE_TASK_STATUS + changedTaskId, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
