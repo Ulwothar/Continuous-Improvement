@@ -1,5 +1,5 @@
 # Continuous-Improvement
-Application which lets users to propose suggestions of changes and improvements in the company environment.
+This web application is a continuous improvement solution for a company of medium to large size. It was build to provide employees with proper tools to send suggestions of improvement of different aspects of company environment. There also is a logging in option, designed for management staff to review and process all suggestions, write comments, move them to different stages and plan tasks to be completed for each suggestion.
 
 # Requirements
 To install the app on your sever, you wil require to install the following packages first:
@@ -23,8 +23,6 @@ For the front-end env variables, most of the address is already there, just chan
 Back end part of this app works on port 5000. It is created with node.js and requires a proper server set up.
 
 All cookies have a 'domain' property set to '.yourdomain'. Please change all those fields to your actual domain address.
-
-//This will be updated and domain address will be stored in local variable, so only one place will have to be updated. Currently  all fields must be changed in auth-controller and user-controller files.
 
 The back end is set to work on ssl encrypted server, so all cookies and API endpoints in front-end part are set to start with 'https://...'. If you don't plan on using ssl encryption, please change those addresses to 'http://...'.
 
